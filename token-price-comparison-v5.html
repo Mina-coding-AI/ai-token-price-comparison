@@ -238,6 +238,140 @@
         .sparkline { display: inline-block; vertical-align: middle; }
         .sparkline-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
 
+        /* Performance Summary Section */
+        .performance-summary {
+            margin-top: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .performance-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 107, 53, 0.05));
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border-bottom: 1px solid transparent;
+        }
+        .performance-toggle:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 107, 53, 0.1));
+        }
+        .performance-toggle.expanded {
+            border-bottom-color: var(--border-color);
+        }
+        .performance-toggle-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .performance-icon {
+            font-size: 1.2rem;
+        }
+        .performance-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .performance-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-left: 8px;
+        }
+        .performance-arrow {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+        .performance-toggle.expanded .performance-arrow {
+            transform: rotate(180deg);
+        }
+        .performance-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .performance-content.expanded {
+            max-height: 2000px;
+        }
+        .performance-inner {
+            padding: 20px 24px;
+        }
+        .performance-disclaimer {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .performance-disclaimer-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .performance-pair {
+            margin-bottom: 24px;
+        }
+        .performance-pair:last-child {
+            margin-bottom: 0;
+        }
+        .performance-pair-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .performance-table {
+            width: 100%;
+            font-size: 0.85rem;
+            border-collapse: collapse;
+        }
+        .performance-table th {
+            text-align: left;
+            padding: 10px 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+        .performance-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+        .performance-table tr:last-child td {
+            border-bottom: none;
+        }
+        .performance-table tr:hover td {
+            background: var(--bg-hover);
+        }
+        .performance-dim {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .performance-aliyun {
+            color: var(--accent-aliyun);
+        }
+        .performance-bytedance {
+            color: var(--accent-bytedance);
+        }
+        .performance-neutral {
+            color: var(--text-secondary);
+        }
+        .performance-better {
+            font-weight: 600;
+        }
+
         /* Ladder Pricing Section */
         .ladder-pricing {
             margin-top: 24px; padding: 24px;
@@ -414,6 +548,152 @@
                 </div>
             </div>
             <div class="comparison-table" id="language-table"></div>
+
+            <!-- Performance Summary -->
+            <div class="performance-summary" id="language-performance">
+                <div class="performance-toggle" onclick="togglePerformance('language')">
+                    <div class="performance-toggle-left">
+                        <span class="performance-icon">💡</span>
+                        <span class="performance-title" data-i18n="performanceRef">性能参考</span>
+                        <span class="performance-subtitle" data-i18n="performanceSubtitle">| Performance Reference</span>
+                    </div>
+                    <span class="performance-arrow" id="language-arrow">▼</span>
+                </div>
+                <div class="performance-content" id="language-content">
+                    <div class="performance-inner">
+                        <div class="performance-disclaimer">
+                            <span class="performance-disclaimer-icon">⚠️</span>
+                            <span data-i18n="performanceDisclaimer">AI生成的开源社区参考：以下性能对比基于Reddit、LMSYS Chatbot Arena、技术博客等公开社区反馈由AI生成，仅供参考。价格数据是本站唯一客观数据。</span>
+                        </div>
+
+                        <!-- Flagship -->
+                        <div class="performance-pair">
+                            <div class="performance-pair-title">Flagship: qwen3-max vs doubao-seed-2.0-pro</div>
+                            <table class="performance-table">
+                                <tr>
+                                    <th data-i18n="perfDim">维度</th>
+                                    <th class="performance-aliyun">qwen3-max</th>
+                                    <th class="performance-bytedance">doubao-seed-2.0-pro</th>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfMath">数学/推理</td>
+                                    <td class="performance-neutral" data-i18n="perfGood">良好</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfBetterAime">更优 (+16% AIME)</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfCoding">编程</td>
+                                    <td class="performance-neutral" data-i18n="perfGood">良好</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfBetterSwe">更优 (+7% SWE-Bench)</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfChinese">中文理解</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfBetter">更优</td>
+                                    <td class="performance-neutral" data-i18n="perfGood">良好</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfMultimodal">多模态</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfAvailable">可用(独立模型)</td>
+                                    <td class="performance-neutral" data-i18n="perfLimited">有限</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfHallucination">幻觉控制</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfBetter">更优</td>
+                                    <td class="performance-neutral" data-i18n="perfMoreProne">较易出现</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfEcosystem">生态成熟度</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfMature">成熟</td>
+                                    <td class="performance-neutral" data-i18n="perfNewer">较新</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfSpeed">速度</td>
+                                    <td class="performance-neutral" data-i18n="perfStandard">标准</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfFaster">更快</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfScale">实际规模</td>
+                                    <td class="performance-neutral" data-i18n="perfEnterprise">企业验证</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perf155M">1.55亿用户</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Pro -->
+                        <div class="performance-pair">
+                            <div class="performance-pair-title">Pro: qwen3.5-plus vs doubao-seed-2.0-lite</div>
+                            <table class="performance-table">
+                                <tr>
+                                    <th data-i18n="perfDim">维度</th>
+                                    <th class="performance-aliyun">qwen3.5-plus</th>
+                                    <th class="performance-bytedance">doubao-seed-2.0-lite</th>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfMultimodal">多模态</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfNative">原生(图文视频)</td>
+                                    <td class="performance-neutral" data-i18n="perfTextOnly">仅文本</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfCoding">编程</td>
+                                    <td class="performance-neutral" data-i18n="perfWeakerComplex">复杂任务较弱</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfBetterAccuracy">更优准确率</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfSpeed">速度</td>
+                                    <td class="performance-neutral" data-i18n="perfStandard">标准</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfFaster">更快</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfLocalDeploy">本地部署</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfYes9B">支持(9B)</td>
+                                    <td class="performance-neutral" data-i18n="perfApiOnly">仅API</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfMaturity">生产成熟度</td>
+                                    <td class="performance-neutral" data-i18n="perfNewerFeb">较新(2026.02)</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfProven">已验证</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Flash -->
+                        <div class="performance-pair">
+                            <div class="performance-pair-title">Flash: qwen3.5-flash vs doubao-seed-2.0-mini</div>
+                            <table class="performance-table">
+                                <tr>
+                                    <th data-i18n="perfDim">维度</th>
+                                    <th class="performance-aliyun">qwen3.5-flash</th>
+                                    <th class="performance-bytedance">doubao-seed-2.0-mini</th>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfFlexibility">灵活性</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfThinkingModes">思考/非思考模式</td>
+                                    <td class="performance-neutral" data-i18n="perfSingleMode">单模式</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfEdgeDeploy">边缘部署</td>
+                                    <td class="performance-neutral" data-i18n="perfLimited">有限</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfEdgeDesigned">专为边缘设计</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfAccuracy">准确率</td>
+                                    <td class="performance-neutral" data-i18n="perfGood">良好</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfBetter718">更优 (71.8%)</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfSpeed">速度</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfFast">快</td>
+                                    <td class="performance-neutral" data-i18n="perfFast">快</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-secondary);" data-i18n="perfSources">
+                            来源: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, 社区基准测试。非官方声明。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="ladder-pricing" id="language-ladder"></div>
         </section>
 
@@ -511,7 +791,22 @@
                 ladderPricing: "完整价格阶梯（按 Token 用量）", viewSource: "查看官方来源 →",
                 tierRange: "Token 范围", tierInput: "输入单价", tierOutput: "输出单价",
                 lowestPriceNote: "起", staleWarning: "天前更新", trendLabel: "趋势",
-                priceChanges: "价格变动提醒", newModels: "新模型发布", noChanges: "今日价格检查完成，无变动。"
+                priceChanges: "价格变动提醒", newModels: "新模型发布", noChanges: "今日价格检查完成，无变动。",
+                performanceRef: "性能参考", performanceSubtitle: "| Performance Reference",
+                performanceDisclaimer: "AI生成的开源社区参考：以下性能对比基于Reddit、LMSYS Chatbot Arena、技术博客等公开社区反馈由AI生成，仅供参考。价格数据是本站唯一客观数据。",
+                perfDim: "维度", perfMath: "数学/推理", perfCoding: "编程", perfChinese: "中文理解",
+                perfMultimodal: "多模态", perfHallucination: "幻觉控制", perfEcosystem: "生态成熟度",
+                perfSpeed: "速度", perfScale: "实际规模", perfFlexibility: "灵活性", perfEdgeDeploy: "边缘部署",
+                perfAccuracy: "准确率", perfLocalDeploy: "本地部署", perfMaturity: "生产成熟度",
+                perfGood: "良好", perfBetter: "更优", perfAvailable: "可用(独立模型)", perfLimited: "有限",
+                perfMoreProne: "较易出现", perfMature: "成熟", perfNewer: "较新", perfStandard: "标准",
+                perfFaster: "更快", perfEnterprise: "企业验证", perf155M: "1.55亿用户",
+                perfNative: "原生(图文视频)", perfTextOnly: "仅文本", perfWeakerComplex: "复杂任务较弱",
+                perfBetterAccuracy: "更优准确率", perfYes9B: "支持(9B)", perfApiOnly: "仅API",
+                perfNewerFeb: "较新(2026.02)", perfProven: "已验证", perfThinkingModes: "思考/非思考模式",
+                perfSingleMode: "单模式", perfEdgeDesigned: "专为边缘设计", perfBetter718: "更优 (71.8%)",
+                perfFast: "快", perfBetterAime: "更优 (+16% AIME)", perfBetterSwe: "更优 (+7% SWE-Bench)",
+                perfSources: "来源: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, 社区基准测试。非官方声明。"
             },
             en: {
                 pageTitle: "AI Token Price Comparison", subtitle: "Comprehensive pricing comparison between Aliyun (Qwen) and Bytedance (Doubao) models across language, vision, and multimodal categories",
@@ -534,7 +829,22 @@
                 ladderPricing: "Complete Price Tiers (by Token Usage)", viewSource: "View Official Source →",
                 tierRange: "Token Range", tierInput: "Input Price", tierOutput: "Output Price",
                 lowestPriceNote: "from", staleWarning: "days ago", trendLabel: "Trend",
-                priceChanges: "Price Change Alert", newModels: "New Models Released", noChanges: "Daily price check complete, no changes."
+                priceChanges: "Price Change Alert", newModels: "New Models Released", noChanges: "Daily price check complete, no changes.",
+                performanceRef: "Performance", performanceSubtitle: "Reference",
+                performanceDisclaimer: "AI-generated from open sources: Performance comparisons below are generated by AI based on community feedback from Reddit, LMSYS Chatbot Arena, technical blogs, and independent benchmarks. For reference only. Prices are the only objective data on this site.",
+                perfDim: "Dimension", perfMath: "Math/Reasoning", perfCoding: "Coding", perfChinese: "Chinese Language",
+                perfMultimodal: "Multimodal", perfHallucination: "Hallucination Control", perfEcosystem: "Ecosystem",
+                perfSpeed: "Speed", perfScale: "Real-world Scale", perfFlexibility: "Flexibility", perfEdgeDeploy: "Edge Deployment",
+                perfAccuracy: "Accuracy", perfLocalDeploy: "Local Deploy", perfMaturity: "Production Maturity",
+                perfGood: "Good", perfBetter: "Better", perfAvailable: "Available (separate)", perfLimited: "Limited",
+                perfMoreProne: "More prone", perfMature: "Mature", perfNewer: "Newer", perfStandard: "Standard",
+                perfFaster: "Faster", perfEnterprise: "Enterprise proven", perf155M: "155M users",
+                perfNative: "Native (text/image/video)", perfTextOnly: "Text only", perfWeakerComplex: "Weaker on complex",
+                perfBetterAccuracy: "Better accuracy", perfYes9B: "Yes (9B)", perfApiOnly: "API only",
+                perfNewerFeb: "Newer (Feb 2026)", perfProven: "Proven", perfThinkingModes: "Thinking + non-thinking",
+                perfSingleMode: "Single mode", perfEdgeDesigned: "Edge-designed", perfBetter718: "Better (71.8%)",
+                perfFast: "Fast", perfBetterAime: "Better (+16% AIME)", perfBetterSwe: "Better (+7% SWE-Bench)",
+                perfSources: "Sources: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, community benchmarks. Not official claims."
             }
         };
 
@@ -904,6 +1214,22 @@
         }
 
         function closeNotification() { document.getElementById('notification-banner').classList.remove('show'); }
+
+        function togglePerformance(category) {
+            const toggle = document.querySelector('#' + category + '-performance .performance-toggle');
+            const content = document.getElementById(category + '-content');
+            const arrow = document.getElementById(category + '-arrow');
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                toggle.classList.remove('expanded');
+                arrow.textContent = '▼';
+            } else {
+                content.classList.add('expanded');
+                toggle.classList.add('expanded');
+                arrow.textContent = '▲';
+            }
+        }
 
         function handleDateChange(selectedDate) {
             const t = i18n[currentLang];
