@@ -707,6 +707,90 @@
                 </div>
             </div>
             <div class="comparison-table" id="vision-table"></div>
+
+            <!-- Performance Summary for Vision Models -->
+            <div class="performance-summary" id="vision-performance">
+                <div class="performance-toggle" onclick="togglePerformance('vision')">
+                    <div class="performance-toggle-left">
+                        <span class="performance-icon">💡</span>
+                        <span class="performance-title" data-i18n="performanceRef">性能参考</span>
+                        <span class="performance-subtitle" data-i18n="performanceSubtitle">| Performance Reference</span>
+                    </div>
+                    <span class="performance-arrow" id="vision-arrow">▼</span>
+                </div>
+                <div class="performance-content" id="vision-content">
+                    <div class="performance-inner">
+                        <div class="performance-disclaimer">
+                            <span class="performance-disclaimer-icon">⚠️</span>
+                            <span data-i18n="performanceDisclaimer">AI生成的开源社区参考：以下性能对比基于Reddit、LMSYS Chatbot Arena、技术博客等公开社区反馈由AI生成，仅供参考。价格数据是本站唯一客观数据。</span>
+                        </div>
+
+                        <!-- Vision Max -->
+                        <div class="performance-pair">
+                            <div class="performance-pair-title">Vision Max: qwen-vl-max vs doubao-1.5-vision-pro</div>
+                            <table class="performance-table">
+                                <tr>
+                                    <th data-i18n="perfDim">维度</th>
+                                    <th class="performance-aliyun">qwen-vl-max</th>
+                                    <th class="performance-bytedance">doubao-1.5-vision-pro</th>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfVisualReasoning">视觉推理</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfAdvancedSpatial">高级空间推理</td>
+                                    <td class="performance-neutral" data-i18n="perfStrongOcr">强OCR能力</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfDocExtraction">文档提取</td>
+                                    <td class="performance-neutral" data-i18n="perfGood">良好</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfProductionTested">生产验证</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfMultilingual">多语言</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perf119Languages">119种语言</td>
+                                    <td class="performance-neutral" data-i18n="perfMajorLanguages">主要语言</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfReleaseDate">发布日期</td>
+                                    <td class="performance-neutral">2024</td>
+                                    <td class="performance-bytedance performance-better">2025-12</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Vision Plus -->
+                        <div class="performance-pair">
+                            <div class="performance-pair-title">Vision Plus: qwen3-vl-plus vs doubao-seed-1.6-vision</div>
+                            <table class="performance-table">
+                                <tr>
+                                    <th data-i18n="perfDim">维度</th>
+                                    <th class="performance-aliyun">qwen3-vl-plus</th>
+                                    <th class="performance-bytedance">doubao-seed-1.6-vision</th>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfArchitecture">架构</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfUnified">统一架构</td>
+                                    <td class="performance-neutral" data-i18n="perfSeparate">独立模型</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfThinkingMode">思考模式</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfThinkingNonThinking">思考+非思考</td>
+                                    <td class="performance-neutral" data-i18n="perfStandard">标准</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfCostEfficiency">成本效率</td>
+                                    <td class="performance-neutral">1-3 yuan/M</td>
+                                    <td class="performance-bytedance performance-better">0.8 yuan/M</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-secondary);" data-i18n="perfSources">
+                            来源: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, 社区基准测试。非官方声明。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="ladder-pricing" id="vision-ladder"></div>
         </section>
 
@@ -720,6 +804,95 @@
                 </div>
             </div>
             <div class="comparison-table" id="code-table"></div>
+
+            <!-- Performance Summary for Code Models -->
+            <div class="performance-summary" id="code-performance">
+                <div class="performance-toggle" onclick="togglePerformance('code')">
+                    <div class="performance-toggle-left">
+                        <span class="performance-icon">💡</span>
+                        <span class="performance-title" data-i18n="performanceRef">性能参考</span>
+                        <span class="performance-subtitle" data-i18n="performanceSubtitle">| Performance Reference</span>
+                    </div>
+                    <span class="performance-arrow" id="code-arrow">▼</span>
+                </div>
+                <div class="performance-content" id="code-content">
+                    <div class="performance-inner">
+                        <div class="performance-disclaimer">
+                            <span class="performance-disclaimer-icon">⚠️</span>
+                            <span data-i18n="performanceDisclaimer">AI生成的开源社区参考：以下性能对比基于Reddit、LMSYS Chatbot Arena、技术博客等公开社区反馈由AI生成，仅供参考。价格数据是本站唯一客观数据。</span>
+                        </div>
+
+                        <!-- Coder Pro -->
+                        <div class="performance-pair">
+                            <div class="performance-pair-title">Coder Pro: qwen3-coder-plus vs doubao-seed-2.0-code</div>
+                            <table class="performance-table">
+                                <tr>
+                                    <th data-i18n="perfDim">维度</th>
+                                    <th class="performance-aliyun">qwen3-coder-plus</th>
+                                    <th class="performance-bytedance">doubao-seed-2.0-code</th>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfCompetitiveProgramming">竞赛编程</td>
+                                    <td class="performance-neutral" data-i18n="perfGood">良好</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfCodeforces3020">Codeforces 3020</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfSWEBench">SWE-Bench</td>
+                                    <td class="performance-neutral" data-i18n="perfGood">良好</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfBetter">更优</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfToolUse">工具使用</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfCodingAgent">Coding Agent能力</td>
+                                    <td class="performance-neutral" data-i18n="perfStandard">标准</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfDebugging">调试能力</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfBetter">更优</td>
+                                    <td class="performance-neutral" data-i18n="perfGood">良好</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfPrice">价格</td>
+                                    <td class="performance-neutral">4-20 yuan/M</td>
+                                    <td class="performance-bytedance performance-better" data-i18n="perfCompetitive">有竞争力</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Coder Lite -->
+                        <div class="performance-pair">
+                            <div class="performance-pair-title">Coder: qwen-coder-turbo vs doubao-seed-code</div>
+                            <table class="performance-table">
+                                <tr>
+                                    <th data-i18n="perfDim">维度</th>
+                                    <th class="performance-aliyun">qwen-coder-turbo</th>
+                                    <th class="performance-bytedance">doubao-seed-code</th>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfIDEFeature">IDE集成</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfOptimized">优化</td>
+                                    <td class="performance-neutral" data-i18n="perfGood">良好</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfCompletionSpeed">补全速度</td>
+                                    <td class="performance-aliyun performance-better" data-i18n="perfFast">快</td>
+                                    <td class="performance-neutral" data-i18n="perfStandard">标准</td>
+                                </tr>
+                                <tr>
+                                    <td class="performance-dim" data-i18n="perfCost">成本</td>
+                                    <td class="performance-aliyun performance-better">2 yuan/M</td>
+                                    <td class="performance-neutral">1.2 yuan/M</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-secondary);" data-i18n="perfSources">
+                            来源: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, 社区基准测试。非官方声明。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="ladder-pricing" id="code-ladder"></div>
         </section>
 
@@ -806,7 +979,16 @@
                 perfNewerFeb: "较新(2026.02)", perfProven: "已验证", perfThinkingModes: "思考/非思考模式",
                 perfSingleMode: "单模式", perfEdgeDesigned: "专为边缘设计", perfBetter718: "更优 (71.8%)",
                 perfFast: "快", perfBetterAime: "更优 (+16% AIME)", perfBetterSwe: "更优 (+7% SWE-Bench)",
-                perfSources: "来源: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, 社区基准测试。非官方声明。"
+                perfSources: "来源: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, 社区基准测试。非官方声明。",
+                perfVisualReasoning: "视觉推理", perfAdvancedSpatial: "高级空间推理", perfStrongOcr: "强OCR能力",
+                perfDocExtraction: "文档提取", perfProductionTested: "生产验证", perf119Languages: "119种语言",
+                perfMajorLanguages: "主要语言", perfReleaseDate: "发布日期",
+                perfArchitecture: "架构", perfUnified: "统一架构", perfSeparate: "独立模型",
+                perfThinkingMode: "思考模式", perfThinkingNonThinking: "思考+非思考", perfCostEfficiency: "成本效率",
+                perfCompetitiveProgramming: "竞赛编程", perfCodeforces3020: "Codeforces 3020", perfToolUse: "工具使用",
+                perfCodingAgent: "Coding Agent能力", perfDebugging: "调试能力", perfPrice: "价格",
+                perfCompetitive: "有竞争力", perfIDEFeature: "IDE集成", perfOptimized: "优化",
+                perfCompletionSpeed: "补全速度"
             },
             en: {
                 pageTitle: "AI Token Price Comparison", subtitle: "Comprehensive pricing comparison between Aliyun (Qwen) and Bytedance (Doubao) models across language, vision, and multimodal categories",
@@ -844,7 +1026,16 @@
                 perfNewerFeb: "Newer (Feb 2026)", perfProven: "Proven", perfThinkingModes: "Thinking + non-thinking",
                 perfSingleMode: "Single mode", perfEdgeDesigned: "Edge-designed", perfBetter718: "Better (71.8%)",
                 perfFast: "Fast", perfBetterAime: "Better (+16% AIME)", perfBetterSwe: "Better (+7% SWE-Bench)",
-                perfSources: "Sources: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, community benchmarks. Not official claims."
+                perfSources: "Sources: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, community benchmarks. Not official claims.",
+                perfVisualReasoning: "Visual Reasoning", perfAdvancedSpatial: "Advanced Spatial", perfStrongOcr: "Strong OCR",
+                perfDocExtraction: "Doc Extraction", perfProductionTested: "Production Tested", perf119Languages: "119 Languages",
+                perfMajorLanguages: "Major Languages", perfReleaseDate: "Release Date",
+                perfArchitecture: "Architecture", perfUnified: "Unified", perfSeparate: "Separate",
+                perfThinkingMode: "Thinking Mode", perfThinkingNonThinking: "Thinking + Non-thinking", perfCostEfficiency: "Cost Efficiency",
+                perfCompetitiveProgramming: "Competitive Programming", perfCodeforces3020: "Codeforces 3020", perfToolUse: "Tool Use",
+                perfCodingAgent: "Coding Agent", perfDebugging: "Debugging", perfPrice: "Price",
+                perfCompetitive: "Competitive", perfIDEFeature: "IDE Integration", perfOptimized: "Optimized",
+                perfCompletionSpeed: "Completion Speed"
             }
         };
 
