@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">AI Token 价格对比 | Aliyun vs Bytedance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --bg-hover: #252530;
+            --text-primary: #f5f5f7;
+            --text-secondary: #8b8b9a;
+            --accent-aliyun: #ff6b35;
+            --accent-bytedance: #00d4aa;
+            --accent-gold: #ffd700;
+            --border-color: #2a2a3a;
+            --gradient-1: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            --gradient-2: linear-gradient(135deg, #00d4aa 0%, #00a8e8 100%);
+            --shadow-glow: 0 0 40px rgba(255, 107, 53, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Playfair Display', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 { top: -200px; right: -200px; background: var(--accent-aliyun); }
+        .bg-glow-2 { bottom: -200px; left: -200px; background: var(--accent-bytedance); }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header & Controls */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            padding: 6px 14px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-color: var(--accent-gold);
+        }
+
+        .update-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 107, 53, 0.1));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 100px;
+            font-size: 0.85rem;
+        }
+
+        .update-badge .icon {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--accent-gold); }
+            50% { opacity: 0.5; box-shadow: 0 0 20px var(--accent-gold); }
+        }
+
+        .next-update {
+            font-family: 'Space Mono', monospace;
+            color: var(--accent-gold);
+        }
+
+        /* Date Selector */
+        .date-selector {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 0;
+        }
+
+        .date-selector label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .date-picker {
+            padding: 10px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .date-picker:hover, .date-picker:focus {
+            border-color: var(--accent-gold);
+            outline: none;
+        }
+
+        .current-date-display {
+            margin-left: auto;
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            font-family: 'Space Mono', monospace;
+            color: var(--accent-gold);
+        }
+
+        /* Notification Banner */
+        .notification-banner {
+            display: none;
+            margin: 20px 0;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 215, 0, 0.1));
+            border: 1px solid rgba(255, 107, 53, 0.4);
+            border-radius: 12px;
+            animation: slideDown 0.4s ease;
+        }
+
+        .notification-banner.show {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .notification-icon {
+            font-size: 24px;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .notification-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .notification-close {
+            padding: 8px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+        }
+
+        .notification-close:hover {
+            color: var(--text-primary);
+        }
+
+        /* Data Warning */
+        .data-warning {
+            display: none;
+            margin: 20px 0;
+            padding: 16px 24px;
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.4);
+            border-radius: 12px;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .data-warning.show {
+            display: flex;
+        }
+
+        .data-warning-icon {
+            font-size: 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 48px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, #8b8b9a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Provider Cards */
+        .providers {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .provider-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .provider-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3), var(--shadow-glow);
+        }
+
+        .provider-card.aliyun {
+            --accent-color: var(--accent-aliyun);
+            --shadow-glow: 0 0 40px rgba(255, 107, 53, 0.15);
+        }
+
+        .provider-card.bytedance {
+            --accent-color: var(--accent-bytedance);
+            --shadow-glow: 0 0 40px rgba(0, 212, 170, 0.15);
+        }
+
+        .provider-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        .provider-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .provider-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .aliyun .provider-logo { background: var(--gradient-1); color: white; }
+        .bytedance .provider-logo { background: var(--gradient-2); color: white; }
+
+        .provider-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .provider-tagline {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .provider-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Category Sections */
+        .category { margin-bottom: 48px; }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+
+        .category-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 20px 24px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s ease;
+            align-items: center;
+        }
+
+        .table-row:last-child { border-bottom: none; }
+        .table-row:hover { background: var(--bg-hover); }
+
+        .model-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .model-name { font-weight: 600; font-size: 1rem; }
+        .model-desc { font-size: 0.8rem; color: var(--text-secondary); }
+
+        .price {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+        }
+
+        .price-input { color: var(--text-primary); }
+        .price-output { color: var(--text-secondary); }
+        .price-unit { font-size: 0.75rem; color: var(--text-secondary); }
+
+        /* Special pricing cards */
+        .special-pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .pricing-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .pricing-card-title { font-weight: 600; font-size: 1.1rem; }
+
+        .pricing-card-provider {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .provider-aliyun { background: rgba(255, 107, 53, 0.15); color: var(--accent-aliyun); }
+        .provider-bytedance { background: rgba(0, 212, 170, 0.15); color: var(--accent-bytedance); }
+
+        .pricing-card-price {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+        }
+
+        .pricing-card-unit { font-size: 0.85rem; color: var(--text-secondary); }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.2s;
+        }
+
+        footer a:hover { border-color: var(--accent-gold); }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .providers { grid-template-columns: 1fr; }
+            .table-header, .table-row { grid-template-columns: 1.5fr 1fr 1fr; }
+            .table-header > :nth-child(4), .table-header > :nth-child(5),
+            .table-row > :nth-child(4), .table-row > :nth-child(5) { display: none; }
+            .top-bar { flex-direction: column; gap: 16px; }
+            .date-selector { flex-direction: column; align-items: flex-start; }
+            .current-date-display { margin-left: 0; }
+        }
+
+        @media (max-width: 640px) {
+            .provider-stats { grid-template-columns: 1fr; }
+            .table-header, .table-row { grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px; }
+            .table-header > :nth-child(3), .table-row > :nth-child(3) { display: none; }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <div class="container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
+                <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">English</button>
+            </div>
+            <div class="update-badge">
+                <span class="icon"></span>
+                <span data-i18n="updateSchedule">每日上午10:00 (北京时间) 自动更新</span>
+                <span class="next-update" id="next-update"></span>
+            </div>
+        </div>
+
+        <!-- Date Selector -->
+        <div class="date-selector">
+            <label data-i18n="selectDate">选择日期：</label>
+            <input type="date" class="date-picker" id="date-picker" min="2026-03-19">
+            <div class="current-date-display" id="current-date-display"></div>
+        </div>
+
+        <!-- Notification Banner -->
+        <div class="notification-banner" id="notification-banner">
+            <span class="notification-icon">📢</span>
+            <div class="notification-content">
+                <div class="notification-title" id="notification-title">价格变动提醒</div>
+                <div class="notification-text" id="notification-text">检测到价格变动，请查看最新数据。</div>
+            </div>
+            <button class="notification-close" onclick="closeNotification()">×</button>
+        </div>
+
+        <!-- Data Warning -->
+        <div class="data-warning" id="data-warning">
+            <span class="data-warning-icon">⚠️</span>
+            <span data-i18n="dataWarning">当前显示的是历史数据，可能不是最新价格。最新数据更新遇到问题，正在使用上次成功获取的价格。</span>
+        </div>
+
+        <header>
+            <div class="badge" data-i18n="liveData">实时价格数据</div>
+            <h1 data-i18n="pageTitle">AI Token 价格对比</h1>
+            <p class="subtitle" data-i18n="subtitle">阿里云 (通义千问) 与字节跳动 (豆包) 全系列模型价格对比，涵盖语言、视觉、多模态等类别</p>
+        </header>
+
+        <!-- Provider Cards -->
+        <div class="providers">
+            <div class="provider-card aliyun fade-in">
+                <div class="provider-header">
+                    <div class="provider-logo">Al</div>
+                    <div>
+                        <div class="provider-name">Aliyun</div>
+                        <div class="provider-tagline" data-i18n="aliyunTagline">通义千问系列</div>
+                    </div>
+                </div>
+                <div class="provider-stats">
+                    <div class="stat">
+                        <div class="stat-value">15+</div>
+                        <div class="stat-label" data-i18n="models">模型</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">0.15</div>
+                        <div class="stat-label" data-i18n="fromPrice">起 ¥/百万Token</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">CN</div>
+                        <div class="stat-label" data-i18n="region">区域</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="provider-card bytedance fade-in">
+                <div class="provider-header">
+                    <div class="provider-logo">Bd</div>
+                    <div>
+                        <div class="provider-name">Bytedance</div>
+                        <div class="provider-tagline" data-i18n="bytedanceTagline">豆包系列</div>
+                    </div>
+                </div>
+                <div class="provider-stats">
+                    <div class="stat">
+                        <div class="stat-value">12+</div>
+                        <div class="stat-label" data-i18n="models">模型</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">0.15</div>
+                        <div class="stat-label" data-i18n="fromPrice">起 ¥/百万Token</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">CN</div>
+                        <div class="stat-label" data-i18n="region">区域</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Language Models -->
+        <section class="category fade-in">
+            <div class="category-header">
+                <div class="category-icon">💬</div>
+                <div>
+                    <h2 class="category-title" data-i18n="languageModels">语言模型</h2>
+                    <p class="category-desc" data-i18n="languageModelsDesc">文本生成与对话 AI 模型</p>
+                </div>
+            </div>
+            <div class="comparison-table" id="language-table">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Vision Models -->
+        <section class="category fade-in">
+            <div class="category-header">
+                <div class="category-icon">👁️</div>
+                <div>
+                    <h2 class="category-title" data-i18n="visionModels">视觉与多模态</h2>
+                    <p class="category-desc" data-i18n="visionModelsDesc">图像理解与视觉推理模型</p>
+                </div>
+            </div>
+            <div class="comparison-table" id="vision-table">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Code Models -->
+        <section class="category fade-in">
+            <div class="category-header">
+                <div class="category-icon">💻</div>
+                <div>
+                    <h2 class="category-title" data-i18n="codeModels">代码与编程</h2>
+                    <p class="category-desc" data-i18n="codeModelsDesc">代码生成与编程任务专用模型</p>
+                </div>
+            </div>
+            <div class="comparison-table" id="code-table">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Image Generation -->
+        <section class="category fade-in">
+            <div class="category-header">
+                <div class="category-icon">🎨</div>
+                <div>
+                    <h2 class="category-title" data-i18n="imageGeneration">图像生成</h2>
+                    <p class="category-desc" data-i18n="imageGenerationDesc">AI 图像创作模型（按张计费）</p>
+                </div>
+            </div>
+            <div class="special-pricing" id="image-cards">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Video & Audio -->
+        <section class="category fade-in">
+            <div class="category-header">
+                <div class="category-icon">🎬</div>
+                <div>
+                    <h2 class="category-title" data-i18n="videoAudio">视频与音频</h2>
+                    <p class="category-desc" data-i18n="videoAudioDesc">视频生成与音频处理模型</p>
+                </div>
+            </div>
+            <div class="special-pricing" id="video-cards">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Third-party Models -->
+        <section class="category fade-in">
+            <div class="category-header">
+                <div class="category-icon">🔗</div>
+                <div>
+                    <h2 class="category-title" data-i18n="thirdPartyModels">第三方模型 (阿里云)</h2>
+                    <p class="category-desc" data-i18n="thirdPartyModelsDesc">通过阿里云模型广场可用的热门模型</p>
+                </div>
+            </div>
+            <div class="comparison-table" id="thirdparty-table">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <footer>
+            <p data-i18n="footerNote">价格显示为中国大陆区域人民币价格，每百万 Token 计费，除非另有说明。</p>
+            <p style="margin-top: 8px;" data-i18n="footerVerify">价格可能因区域不同而变化，请以 <a href="https://help.aliyun.com/zh/model-studio/model-pricing" target="_blank">阿里云</a> 和 <a href="https://www.volcengine.com/product/doubao" target="_blank">字节跳动</a> 官方页面为准。</p>
+            <p style="margin-top: 16px; font-size: 0.75rem; opacity: 0.6;" id="footer-date"></p>
+        </footer>
+    </div>
+
+    <script>
+        // Translations
+        const i18n = {
+            zh: {
+                pageTitle: "AI Token 价格对比",
+                subtitle: "阿里云 (通义千问) 与字节跳动 (豆包) 全系列模型价格对比，涵盖语言、视觉、多模态等类别",
+                liveData: "实时价格数据",
+                updateSchedule: "每日上午10:00 (北京时间) 自动更新",
+                selectDate: "选择日期：",
+                dataWarning: "当前显示的是历史数据，可能不是最新价格。最新数据更新遇到问题，正在使用上次成功获取的价格。",
+                aliyunTagline: "通义千问系列",
+                bytedanceTagline: "豆包系列",
+                models: "模型",
+                fromPrice: "起 ¥/百万Token",
+                region: "区域",
+                languageModels: "语言模型",
+                languageModelsDesc: "文本生成与对话 AI 模型",
+                visionModels: "视觉与多模态",
+                visionModelsDesc: "图像理解与视觉推理模型",
+                codeModels: "代码与编程",
+                codeModelsDesc: "代码生成与编程任务专用模型",
+                imageGeneration: "图像生成",
+                imageGenerationDesc: "AI 图像创作模型（按张计费）",
+                videoAudio: "视频与音频",
+                videoAudioDesc: "视频生成与音频处理模型",
+                thirdPartyModels: "第三方模型 (阿里云)",
+                thirdPartyModelsDesc: "通过阿里云模型广场可用的热门模型",
+                footerNote: "价格显示为中国大陆区域人民币价格，每百万 Token 计费，除非另有说明。",
+                footerVerify: "价格可能因区域不同而变化，请以 <a href=\"https://help.aliyun.com/zh/model-studio/model-pricing\" target=\"_blank\">阿里云</a> 和 <a href=\"https://www.volcengine.com/product/doubao\" target=\"_blank\">字节跳动</a> 官方页面为准。",
+                model: "模型",
+                aliyunInput: "阿里云输入",
+                aliyunOutput: "阿里云输出",
+                bytedanceInput: "字节输入",
+                bytedanceOutput: "字节输出",
+                inputPrice: "输入价格",
+                outputPrice: "输出价格",
+                bestFor: "适用场景",
+                perImage: "每张",
+                perMinute: "每分钟",
+                perHour: "每小时",
+                perVideo: "每视频",
+                flagship: "旗舰版 / Max",
+                flagshipDesc: "最高能力，复杂推理",
+                pro: "专业版 / Pro",
+                proDesc: "性能与成本平衡",
+                flash: "轻量版 / Lite",
+                flashDesc: "快速，适合简单任务",
+                turbo: "极速版 / Turbo",
+                turboDesc: "超低延迟",
+                visionPro: "视觉增强版",
+                visionProDesc: "高级图像理解",
+                omni: "全模态 / Omni",
+                omniDesc: "全模态理解（音频+视觉）",
+                reasoning: "推理版 / Reasoning",
+                reasoningDesc: "视觉推理与分析",
+                coder: "代码版 / Coder",
+                coderDesc: "代码生成与补全",
+                deepReasoning: "深度推理",
+                deepReasoningDesc: "复杂问题深度推理"
+            },
+            en: {
+                pageTitle: "AI Token Price Comparison",
+                subtitle: "Comprehensive pricing comparison between Aliyun (Qwen) and Bytedance (Doubao) models across language, vision, and multimodal categories",
+                liveData: "Live Pricing Data",
+                updateSchedule: "Auto-updates daily at 10:00 AM Beijing Time",
+                selectDate: "Select Date:",
+                dataWarning: "Showing historical data which may not reflect current prices. Latest update encountered issues, using last known prices.",
+                aliyunTagline: "Tongyi Qwen Series",
+                bytedanceTagline: "Doubao Series",
+                models: "Models",
+                fromPrice: "From ¥/MTok",
+                region: "Region",
+                languageModels: "Language Models",
+                languageModelsDesc: "Text generation and conversational AI models",
+                visionModels: "Vision & Multimodal",
+                visionModelsDesc: "Image understanding and visual reasoning models",
+                codeModels: "Code & Programming",
+                codeModelsDesc: "Specialized models for code generation and programming tasks",
+                imageGeneration: "Image Generation",
+                imageGenerationDesc: "AI-powered image creation models (priced per image)",
+                videoAudio: "Video & Audio",
+                videoAudioDesc: "Video generation and audio processing models",
+                thirdPartyModels: "Third-party Models (Aliyun)",
+                thirdPartyModelsDesc: "Popular models available through Aliyun Model Studio",
+                footerNote: "Prices shown are for Mainland China region in CNY per million tokens unless otherwise specified.",
+                footerVerify: "Pricing may vary by region. Please verify on <a href=\"https://help.aliyun.com/zh/model-studio/model-pricing\" target=\"_blank\">Aliyun</a> and <a href=\"https://www.volcengine.com/product/doubao\" target=\"_blank\">Bytedance</a> official pages.",
+                model: "Model",
+                aliyunInput: "Aliyun Input",
+                aliyunOutput: "Aliyun Output",
+                bytedanceInput: "Bytedance Input",
+                bytedanceOutput: "Bytedance Output",
+                inputPrice: "Input Price",
+                outputPrice: "Output Price",
+                bestFor: "Best For",
+                perImage: "per image",
+                perMinute: "per minute",
+                perHour: "per hour",
+                perVideo: "per video",
+                flagship: "Flagship / Max",
+                flagshipDesc: "Highest capability, complex reasoning",
+                pro: "Pro / Plus",
+                proDesc: "Balanced performance and cost",
+                flash: "Flash / Lite",
+                flashDesc: "Fast, cost-effective for simple tasks",
+                turbo: "Turbo",
+                turboDesc: "Ultra-fast, lowest latency",
+                visionPro: "Vision Pro",
+                visionProDesc: "Advanced image understanding",
+                omni: "Omni",
+                omniDesc: "Full multimodal understanding",
+                reasoning: "Reasoning",
+                reasoningDesc: "Visual reasoning and analysis",
+                coder: "Coder",
+                coderDesc: "Code generation and completion",
+                deepReasoning: "Deep Reasoning",
+                deepReasoningDesc: "Deep reasoning for complex problems"
+            }
+        };
+
+        // Price data (embedded for demo - in production this loads from JSON)
+        const priceData = {
+            "2026-03-19": {
+                aliyun: {
+                    language: {
+                        "qwen-max": { input: 7.0, output: 28.0 },
+                        "qwen-plus": { input: 0.8, output: 2.0 },
+                        "qwen-turbo": { input: 0.3, output: 0.6 },
+                        "qwen-coder-plus": { input: 3.0, output: 18.0 },
+                        "qwen-coder-turbo": { input: 1.2, output: 7.2 },
+                        "qwq-32b": { input: 2.0, output: 6.0 }
+                    },
+                    vision: {
+                        "qwen-vl-max": { input: 3.0, output: 30.0 },
+                        "qwen-vl-plus": { input: 1.0, output: 10.0 },
+                        "qwen-omni": { input: 1.8, output: 6.9 },
+                        "qvq-max": { input: 8.0, output: 32.0 }
+                    },
+                    image: {
+                        "qwen-image-2.0": { price: 0.50, unit: "per_image" },
+                        "wanxiang-2.1-t2i": { price: 0.20, unit: "per_image" }
+                    },
+                    video: {
+                        "wanxiang-video": { price: 0.50, unit: "per_video", notes: "varies_by_length" }
+                    }
+                },
+                bytedance: {
+                    language: {
+                        "doubao-seed-2.0-pro": { input: 9.6, output: 48.0 },
+                        "doubao-1.5-pro": { input: 2.4, output: 12.0 },
+                        "doubao-1.5-lite": { input: 0.6, output: 6.0 },
+                        "doubao-1.5-flash": { input: 0.15, output: 1.5 }
+                    },
+                    vision: {
+                        "doubao-vision-pro": { input: 1.2, output: 12.0 },
+                        "doubao-vision-lite": { input: 0.4, output: 4.0 }
+                    },
+                    image: {
+                        "doubao-image": { price: 0.22, unit: "per_image", range: "0.15-0.30" }
+                    },
+                    video: {
+                        "doubao-seedance": { price: 1.10, unit: "per_minute", range: "0.20-2.00" }
+                    },
+                    audio: {
+                        "doubao-asr": { price: 2.70, unit: "per_hour", range: "0.80-4.60" }
+                    }
+                },
+                thirdParty: {
+                    "deepseek-v3.2": { provider: "deepseek", input: 2.0, output: 3.0 },
+                    "kimi-k2.5": { provider: "moonshot", input: 4.0, output: 21.0 },
+                    "glm-5": { provider: "zhipu", input: 4.0, output: 18.0 }
+                }
+            },
+            "2026-03-20": {
+                aliyun: {
+                    language: {
+                        "qwen-max": { input: 7.0, output: 28.0 },
+                        "qwen-plus": { input: 0.8, output: 2.0 },
+                        "qwen-turbo": { input: 0.3, output: 0.6 },
+                        "qwen-coder-plus": { input: 3.0, output: 18.0 },
+                        "qwen-coder-turbo": { input: 1.2, output: 7.2 },
+                        "qwq-32b": { input: 2.0, output: 6.0 }
+                    },
+                    vision: {
+                        "qwen-vl-max": { input: 3.0, output: 30.0 },
+                        "qwen-vl-plus": { input: 1.0, output: 10.0 },
+                        "qwen-omni": { input: 1.8, output: 6.9 },
+                        "qvq-max": { input: 8.0, output: 32.0 }
+                    },
+                    image: {
+                        "qwen-image-2.0": { price: 0.50, unit: "per_image" },
+                        "wanxiang-2.1-t2i": { price: 0.20, unit: "per_image" }
+                    },
+                    video: {
+                        "wanxiang-video": { price: 0.50, unit: "per_video", notes: "varies_by_length" }
+                    }
+                },
+                bytedance: {
+                    language: {
+                        "doubao-seed-2.0-pro": { input: 9.6, output: 48.0 },
+                        "doubao-1.5-pro": { input: 2.4, output: 12.0 },
+                        "doubao-1.5-lite": { input: 0.6, output: 6.0 },
+                        "doubao-1.5-flash": { input: 0.15, output: 1.5 }
+                    },
+                    vision: {
+                        "doubao-vision-pro": { input: 1.2, output: 12.0 },
+                        "doubao-vision-lite": { input: 0.4, output: 4.0 }
+                    },
+                    image: {
+                        "doubao-image": { price: 0.22, unit: "per_image", range: "0.15-0.30" }
+                    },
+                    video: {
+                        "doubao-seedance": { price: 1.10, unit: "per_minute", range: "0.20-2.00" }
+                    },
+                    audio: {
+                        "doubao-asr": { price: 2.70, unit: "per_hour", range: "0.80-4.60" }
+                    }
+                },
+                thirdParty: {
+                    "deepseek-v3.2": { provider: "deepseek", input: 2.0, output: 3.0 },
+                    "kimi-k2.5": { provider: "moonshot", input: 4.0, output: 21.0 },
+                    "glm-5": { provider: "zhipu", input: 4.0, output: 18.0 }
+                }
+            }
+        };
+
+        let currentLang = 'zh';
+        let currentDate = new Date().toISOString().split('T')[0];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            detectLanguage();
+            setupDatePicker();
+            updateNextUpdateTime();
+            renderAllTables();
+            updateFooterDate();
+            
+            // Check for price changes (simulated)
+            checkPriceChanges();
+        });
+
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('en')) {
+                switchLanguage('en');
+            } else {
+                switchLanguage('zh');
+            }
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            // Update all i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (i18n[lang][key]) {
+                    el.innerHTML = i18n[lang][key];
+                }
+            });
+            
+            // Update page title
+            document.getElementById('page-title').textContent = i18n[lang].pageTitle + ' | Aliyun vs Bytedance';
+            
+            // Re-render tables with new language
+            renderAllTables();
+        }
+
+        function setupDatePicker() {
+            const picker = document.getElementById('date-picker');
+            picker.value = currentDate;
+            picker.max = new Date().toISOString().split('T')[0];
+            
+            picker.addEventListener('change', function() {
+                currentDate = this.value;
+                updateCurrentDateDisplay();
+                renderAllTables();
+                
+                // Show warning if viewing historical data
+                const today = new Date().toISOString().split('T')[0];
+                const warning = document.getElementById('data-warning');
+                if (currentDate !== today) {
+                    warning.classList.add('show');
+                } else {
+                    warning.classList.remove('show');
+                }
+            });
+            
+            updateCurrentDateDisplay();
+        }
+
+        function updateCurrentDateDisplay() {
+            const display = document.getElementById('current-date-display');
+            const date = new Date(currentDate);
+            const formatted = currentLang === 'zh' 
+                ? date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' })
+                : date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
+            display.textContent = formatted;
+        }
+
+        function updateNextUpdateTime() {
+            const now = new Date();
+            const beijingTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Shanghai"}));
+            const nextUpdate = new Date(beijingTime);
+            nextUpdate.setHours(10, 0, 0, 0);
+            
+            if (beijingTime.getHours() >= 10) {
+                nextUpdate.setDate(nextUpdate.getDate() + 1);
+            }
+            
+            const hoursUntil = Math.floor((nextUpdate - beijingTime) / (1000 * 60 * 60));
+            const minutesUntil = Math.floor(((nextUpdate - beijingTime) % (1000 * 60 * 60)) / (1000 * 60));
+            
+            const nextUpdateEl = document.getElementById('next-update');
+            if (currentLang === 'zh') {
+                nextUpdateEl.textContent = `下次更新: ${hoursUntil}小时${minutesUntil}分钟后`;
+            } else {
+                nextUpdateEl.textContent = `Next: ${hoursUntil}h ${minutesUntil}m`;
+            }
+        }
+
+        function renderAllTables() {
+            const data = priceData[currentDate] || priceData['2026-03-20'];
+            
+            renderLanguageTable(data);
+            renderVisionTable(data);
+            renderCodeTable(data);
+            renderImageCards(data);
+            renderVideoCards(data);
+            renderThirdPartyTable(data);
+        }
+
+        function renderLanguageTable(data) {
+            const t = i18n[currentLang];
+            const container = document.getElementById('language-table');
+            
+            let html = `
+                <div class="table-header">
+                    <div>${t.model}</div>
+                    <div>${t.aliyunInput}</div>
+                    <div>${t.aliyunOutput}</div>
+                    <div>${t.bytedanceInput}</div>
+                    <div>${t.bytedanceOutput}</div>
+                </div>
+            `;
+            
+            // Flagship row
+            html += `
+                <div class="table-row">
+                    <div class="model-info">
+                        <div class="model-name">${t.flagship}</div>
+                        <div class="model-desc">${t.flagshipDesc}</div>
+                    </div>
+                    <div class="price price-input">¥${data.aliyun.language['qwen-max'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.aliyun.language['qwen-max'].output} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-input">¥${data.bytedance.language['doubao-seed-2.0-pro'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.bytedance.language['doubao-seed-2.0-pro'].output} <span class="price-unit">/MTok</span></div>
+                </div>
+            `;
+            
+            // Pro row
+            html += `
+                <div class="table-row">
+                    <div class="model-info">
+                        <div class="model-name">${t.pro}</div>
+                        <div class="model-desc">${t.proDesc}</div>
+                    </div>
+                    <div class="price price-input">¥${data.aliyun.language['qwen-plus'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.aliyun.language['qwen-plus'].output} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-input">¥${data.bytedance.language['doubao-1.5-pro'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.bytedance.language['doubao-1.5-pro'].output} <span class="price-unit">/MTok</span></div>
+                </div>
+            `;
+            
+            // Flash row
+            html += `
+                <div class="table-row">
+                    <div class="model-info">
+                        <div class="model-name">${t.flash}</div>
+                        <div class="model-desc">${t.flashDesc}</div>
+                    </div>
+                    <div class="price price-input">-</div>
+                    <div class="price price-output">-</div>
+                    <div class="price price-input">¥${data.bytedance.language['doubao-1.5-flash'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.bytedance.language['doubao-1.5-flash'].output} <span class="price-unit">/MTok</span></div>
+                </div>
+            `;
+            
+            // Turbo row
+            html += `
+                <div class="table-row">
+                    <div class="model-info">
+                        <div class="model-name">${t.turbo}</div>
+                        <div class="model-desc">${t.turboDesc}</div>
+                    </div>
+                    <div class="price price-input">¥${data.aliyun.language['qwen-turbo'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.aliyun.language['qwen-turbo'].output} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-input">-</div>
+                    <div class="price price-output">-</div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function renderVisionTable(data) {
+            const t = i18n[currentLang];
+            const container = document.getElementById('vision-table');
+            
+            let html = `
+                <div class="table-header">
+                    <div>${t.model}</div>
+                    <div>${t.aliyunInput}</div>
+                    <div>${t.aliyunOutput}</div>
+                    <div>${t.bytedanceInput}</div>
+                    <div>${t.bytedanceOutput}</div>
+                </div>
+            `;
+            
+            // Vision Pro row
+            html += `
+                <div class="table-row">
+                    <div class="model-info">
+                        <div class="model-name">${t.visionPro}</div>
+                        <div class="model-desc">${t.visionProDesc}</div>
+                    </div>
+                    <div class="price price-input">¥${data.aliyun.vision['qwen-vl-max'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.aliyun.vision['qwen-vl-max'].output} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-input">¥${data.bytedance.vision['doubao-vision-pro'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.bytedance.vision['doubao-vision-pro'].output} <span class="price-unit">/MTok</span></div>
+                </div>
+            `;
+            
+            // Omni row
+            html += `
+                <div class="table-row">
+                    <div class="model-info">
+                        <div class="model-name">${t.omni}</div>
+                        <div class="model-desc">${t.omniDesc}</div>
+                    </div>
+                    <div class="price price-input">¥${data.aliyun.vision['qwen-omni'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.aliyun.vision['qwen-omni'].output} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-input">-</div>
+                    <div class="price price-output">-</div>
+                </div>
+            `;
+            
+            // Reasoning row
+            html += `
+                <div class="table-row">
+                    <div class="model-info">
+                        <div class="model-name">${t.reasoning}</div>
+                        <div class="model-desc">${t.reasoningDesc}</div>
+                    </div>
+                    <div class="price price-input">¥${data.aliyun.vision['qvq-max'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.aliyun.vision['qvq-max'].output} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-input">-</div>
+                    <div class="price price-output">-</div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function renderCodeTable(data) {
+            const t = i18n[currentLang];
+            const container = document.getElementById('code-table');
+            
+            let html = `
+                <div class="table-header">
+                    <div>${t.model}</div>
+                    <div>${t.aliyunInput}</div>
+                    <div>${t.aliyunOutput}</div>
+                    <div>${t.bytedanceInput}</div>
+                    <div>${t.bytedanceOutput}</div>
+                </div>
+            `;
+            
+            // Coder row
+            html += `
+                <div class="table-row">
+                    <div class="model-info">
+                        <div class="model-name">${t.coder}</div>
+                        <div class="model-desc">${t.coderDesc}</div>
+                    </div>
+                    <div class="price price-input">¥${data.aliyun.language['qwen-coder-plus'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.aliyun.language['qwen-coder-plus'].output} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-input">-</div>
+                    <div class="price price-output">-</div>
+                </div>
+            `;
+            
+            // Deep Reasoning row
+            html += `
+                <div class="table-row">
+                    <div class="model-info">
+                        <div class="model-name">${t.deepReasoning}</div>
+                        <div class="model-desc">${t.deepReasoningDesc}</div>
+                    </div>
+                    <div class="price price-input">¥${data.aliyun.language['qwq-32b'].input} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-output">¥${data.aliyun.language['qwq-32b'].output} <span class="price-unit">/MTok</span></div>
+                    <div class="price price-input">-</div>
+                    <div class="price price-output">-</div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function renderImageCards(data) {
+            const t = i18n[currentLang];
+            const container = document.getElementById('image-cards');
+            
+            let html = '';
+            
+            // Aliyun Image
+            html += `
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-card-title">Qwen Image 2.0 Pro</div>
+                        <div class="pricing-card-provider provider-aliyun">Aliyun</div>
+                    </div>
+                    <div class="pricing-card-price">¥${data.aliyun.image['qwen-image-2.0'].price.toFixed(2)}</div>
+                    <div class="pricing-card-unit">${t.perImage}</div>
+                </div>
+            `;
+            
+            // Wanxiang
+            html += `
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-card-title">Wanxiang 2.1 (T2I)</div>
+                        <div class="pricing-card-provider provider-aliyun">Aliyun</div>
+                    </div>
+                    <div class="pricing-card-price">¥${data.aliyun.image['wanxiang-2.1-t2i'].price.toFixed(2)}</div>
+                    <div class="pricing-card-unit">${t.perImage}</div>
+                </div>
+            `;
+            
+            // Doubao Image
+            html += `
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-card-title">Doubao Image</div>
+                        <div class="pricing-card-provider provider-bytedance">Bytedance</div>
+                    </div>
+                    <div class="pricing-card-price">¥${data.bytedance.image['doubao-image'].price.toFixed(2)}</div>
+                    <div class="pricing-card-unit">${t.perImage} (${data.bytedance.image['doubao-image'].range})</div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function renderVideoCards(data) {
+            const t = i18n[currentLang];
+            const container = document.getElementById('video-cards');
+            
+            let html = '';
+            
+            // Wanxiang Video
+            html += `
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-card-title">Wanxiang Video</div>
+                        <div class="pricing-card-provider provider-aliyun">Aliyun</div>
+                    </div>
+                    <div class="pricing-card-price">¥${data.aliyun.video['wanxiang-video'].price.toFixed(2)}</div>
+                    <div class="pricing-card-unit">${t.perVideo}</div>
+                </div>
+            `;
+            
+            // Doubao Seedance
+            html += `
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-card-title">Doubao Seedance</div>
+                        <div class="pricing-card-provider provider-bytedance">Bytedance</div>
+                    </div>
+                    <div class="pricing-card-price">¥${data.bytedance.video['doubao-seedance'].price.toFixed(2)}</div>
+                    <div class="pricing-card-unit">${t.perMinute} (${data.bytedance.video['doubao-seedance'].range})</div>
+                </div>
+            `;
+            
+            // Doubao ASR
+            html += `
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <div class="pricing-card-title">Audio ASR</div>
+                        <div class="pricing-card-provider provider-bytedance">Bytedance</div>
+                    </div>
+                    <div class="pricing-card-price">¥${data.bytedance.audio['doubao-asr'].price.toFixed(2)}</div>
+                    <div class="pricing-card-unit">${t.perHour} (${data.bytedance.audio['doubao-asr'].range})</div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function renderThirdPartyTable(data) {
+            const t = i18n[currentLang];
+            const container = document.getElementById('thirdparty-table');
+            
+            let html = `
+                <div class="table-header">
+                    <div>${t.model}</div>
+                    <div>${t.inputPrice}</div>
+                    <div>${t.outputPrice}</div>
+                    <div>${t.bestFor}</div>
+                </div>
+            `;
+            
+            for (const [model, info] of Object.entries(data.thirdParty)) {
+                const bestFor = model.includes('deepseek') ? 'Reasoning & coding' : 
+                               model.includes('kimi') ? 'Long context' : 'General purpose';
+                html += `
+                    <div class="table-row">
+                        <div class="model-info">
+                            <div class="model-name">${model.replace(/-/g, ' ').toUpperCase()}</div>
+                        </div>
+                        <div class="price price-input">¥${info.input} <span class="price-unit">/MTok</span></div>
+                        <div class="price price-output">¥${info.output} <span class="price-unit">/MTok</span></div>
+                        <div class="model-desc">${bestFor}</div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        function checkPriceChanges() {
+            // Simulate checking for price changes
+            // In production, this would compare with previous day's data
+            const hasChanges = false; // Set to true to test notification
+            
+            if (hasChanges) {
+                showNotification('价格变动提醒', '检测到价格变动，请查看最新数据。');
+            }
+        }
+
+        function showNotification(title, text) {
+            document.getElementById('notification-title').textContent = title;
+            document.getElementById('notification-text').textContent = text;
+            document.getElementById('notification-banner').classList.add('show');
+        }
+
+        function closeNotification() {
+            document.getElementById('notification-banner').classList.remove('show');
+        }
+
+        function updateFooterDate() {
+            const date = new Date();
+            const formatted = currentLang === 'zh'
+                ? `生成于 ${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
+                : `Generated on ${date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+            document.getElementById('footer-date').textContent = formatted;
+        }
+
+        // Update countdown every minute
+        setInterval(updateNextUpdateTime, 60000);
+    </script>
+</body>
+</html>

@@ -92,6 +92,101 @@
         .next-update { font-family: 'Space Mono', monospace; color: var(--accent-gold); }
         .last-updated { font-family: 'Space Mono', monospace; color: var(--text-secondary); font-size: 0.8rem; }
 
+        /* Subscribe Button */
+        .subscribe-btn {
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.2), rgba(0, 168, 232, 0.2));
+            border: 1px solid rgba(0, 212, 170, 0.5);
+            border-radius: 8px;
+            color: var(--accent-bytedance);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .subscribe-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.3), rgba(0, 168, 232, 0.3));
+            transform: translateY(-1px);
+        }
+        .subscribe-btn.subscribed {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 215, 0, 0.2));
+            border-color: rgba(255, 215, 0, 0.5);
+            color: var(--accent-gold);
+        }
+
+        /* Subscribe Modal */
+        .subscribe-modal {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000; justify-content: center; align-items: center;
+        }
+        .subscribe-modal.show { display: flex; }
+        .subscribe-modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 400px; width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .subscribe-modal-title {
+            font-size: 1.25rem; font-weight: 600;
+            margin-bottom: 8px; text-align: center;
+        }
+        .subscribe-modal-desc {
+            color: var(--text-secondary); font-size: 0.9rem;
+            margin-bottom: 24px; text-align: center;
+        }
+        .subscribe-input {
+            width: 100%; padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .subscribe-input:focus {
+            outline: none; border-color: var(--accent-gold);
+        }
+        .subscribe-input::placeholder {
+            color: var(--text-secondary);
+        }
+        .subscribe-error {
+            color: #ef4444; font-size: 0.85rem;
+            margin-bottom: 16px; text-align: center;
+            display: none;
+        }
+        .subscribe-error.show { display: block; }
+        .subscribe-actions {
+            display: flex; gap: 12px;
+        }
+        .subscribe-actions button {
+            flex: 1; padding: 12px;
+            border-radius: 8px; cursor: pointer;
+            font-size: 0.9rem; transition: all 0.2s;
+        }
+        .subscribe-confirm {
+            background: var(--accent-gold);
+            border: none; color: var(--bg-primary);
+            font-weight: 600;
+        }
+        .subscribe-confirm:hover {
+            opacity: 0.9;
+        }
+        .subscribe-cancel {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .subscribe-cancel:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
         /* Notification Banner */
         .notification-banner {
             display: none; margin: 20px 0; padding: 16px 24px;
@@ -470,13 +565,19 @@
                 <button class="lang-btn active" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
                 <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">English</button>
             </div>
-            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
-                <div class="update-badge">
-                    <span class="icon"></span>
-                    <span data-i18n="updateSchedule">每日上午 10:00 (北京时间) 自动更新</span>
-                    <span class="next-update" id="next-update"></span>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <button class="subscribe-btn" id="subscribe-btn" onclick="openSubscribeModal()">
+                    <span>💬</span>
+                    <span data-i18n="subscribeBtn">订阅提醒</span>
+                </button>
+                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+                    <div class="update-badge">
+                        <span class="icon"></span>
+                        <span data-i18n="updateSchedule">每日上午 10:00 (北京时间) 自动更新</span>
+                        <span class="next-update" id="next-update"></span>
+                    </div>
+                    <div class="last-updated" id="last-updated"></div>
                 </div>
-                <div class="last-updated" id="last-updated"></div>
             </div>
         </div>
 
@@ -967,6 +1068,11 @@
                 perfSingleMode: "单模式", perfEdgeDesigned: "专为边缘设计", perfBetter718: "更优 (71.8%)",
                 perfFast: "快", perfBetterAime: "更优 (+16% AIME)", perfBetterSwe: "更优 (+7% SWE-Bench)",
                 perfSources: "来源: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, 社区基准测试。非官方声明。",
+                subscribeBtn: "订阅提醒", subscribed: "已订阅", manageSubscription: "管理订阅",
+                subscribeTitle: "订阅价格提醒", subscribeDesc: "输入您的钉钉工号，当价格变动或有新模型发布时，您将收到钉钉通知",
+                subscribedAs: "当前订阅", subscribe: "订阅", unsubscribe: "取消订阅", cancel: "取消",
+                subscribeError: "请输入6位数字工号", subscribeSuccess: "订阅成功！您将收到价格变动和新模型通知",
+                unsubscribeSuccess: "您已成功退订，将不再接收通知",
                 perfVisualReasoning: "视觉推理", perfAdvancedSpatial: "高级空间推理", perfStrongOcr: "强OCR能力",
                 perfDocExtraction: "文档提取", perfProductionTested: "生产验证", perf119Languages: "119种语言",
                 perfMajorLanguages: "主要语言", perfReleaseDate: "发布日期",
@@ -1014,6 +1120,11 @@
                 perfSingleMode: "Single mode", perfEdgeDesigned: "Edge-designed", perfBetter718: "Better (71.8%)",
                 perfFast: "Fast", perfBetterAime: "Better (+16% AIME)", perfBetterSwe: "Better (+7% SWE-Bench)",
                 perfSources: "Sources: LMSYS Chatbot Arena, Reddit r/LocalLLaMA, r/Qwen_AI, ArtificialAnalysis.ai, community benchmarks. Not official claims.",
+                subscribeBtn: "Subscribe", subscribed: "Subscribed", manageSubscription: "Manage Subscription",
+                subscribeTitle: "Subscribe to Notifications", subscribeDesc: "Enter your DingTalk UserID to receive notifications for price changes and new models",
+                subscribedAs: "Subscribed as", subscribe: "Subscribe", unsubscribe: "Unsubscribe", cancel: "Cancel",
+                subscribeError: "Please enter exactly 6 digits", subscribeSuccess: "Subscribed successfully! You will receive price change and new model notifications",
+                unsubscribeSuccess: "You have successfully unsubscribed and will no longer receive notifications",
                 perfVisualReasoning: "Visual Reasoning", perfAdvancedSpatial: "Advanced Spatial", perfStrongOcr: "Strong OCR",
                 perfDocExtraction: "Doc Extraction", perfProductionTested: "Production Tested", perf119Languages: "119 Languages",
                 perfMajorLanguages: "Major Languages", perfReleaseDate: "Release Date",
@@ -1477,6 +1588,111 @@
                 : `Next: ${hoursUntil}h ${minutesUntil}m`;
         }
         setInterval(updateNextUpdateTime, 60000);
+
+        // Subscribe Modal Functions
+        function openSubscribeModal() {
+            const modal = document.getElementById('subscribe-modal');
+            const isSubscribed = localStorage.getItem('dingtalk_subscribed') === 'true';
+            const userId = localStorage.getItem('dingtalk_userid');
+
+            if (isSubscribed && userId) {
+                // Show manage subscription view
+                document.getElementById('subscribe-modal-title').textContent = i18n[currentLang].manageSubscription;
+                document.getElementById('subscribe-modal-desc').textContent = i18n[currentLang].subscribedAs + ': ' + userId;
+                document.getElementById('subscribe-input').style.display = 'none';
+                document.getElementById('subscribe-confirm-btn').textContent = i18n[currentLang].unsubscribe;
+                document.getElementById('subscribe-confirm-btn').onclick = unsubscribe;
+            } else {
+                // Show subscribe view
+                document.getElementById('subscribe-modal-title').textContent = i18n[currentLang].subscribeTitle;
+                document.getElementById('subscribe-modal-desc').textContent = i18n[currentLang].subscribeDesc;
+                document.getElementById('subscribe-input').style.display = 'block';
+                document.getElementById('subscribe-input').value = '';
+                document.getElementById('subscribe-confirm-btn').textContent = i18n[currentLang].subscribe;
+                document.getElementById('subscribe-confirm-btn').onclick = subscribe;
+            }
+
+            document.getElementById('subscribe-error').classList.remove('show');
+            modal.classList.add('show');
+        }
+
+        function closeSubscribeModal() {
+            document.getElementById('subscribe-modal').classList.remove('show');
+        }
+
+        function subscribe() {
+            const userId = document.getElementById('subscribe-input').value.trim();
+            const errorEl = document.getElementById('subscribe-error');
+
+            // Validate: exactly 6 digits
+            if (!/^\d{6}$/.test(userId)) {
+                errorEl.textContent = i18n[currentLang].subscribeError;
+                errorEl.classList.add('show');
+                return;
+            }
+
+            // Store subscription
+            localStorage.setItem('dingtalk_subscribed', 'true');
+            localStorage.setItem('dingtalk_userid', userId);
+
+            // Update UI
+            updateSubscribeButton();
+            closeSubscribeModal();
+
+            // Show success notification
+            alert(i18n[currentLang].subscribeSuccess);
+        }
+
+        function unsubscribe() {
+            localStorage.removeItem('dingtalk_subscribed');
+            localStorage.removeItem('dingtalk_userid');
+
+            // Update UI
+            updateSubscribeButton();
+            closeSubscribeModal();
+
+            // Show success notification
+            alert(i18n[currentLang].unsubscribeSuccess);
+        }
+
+        function updateSubscribeButton() {
+            const btn = document.getElementById('subscribe-btn');
+            const isSubscribed = localStorage.getItem('dingtalk_subscribed') === 'true';
+
+            if (isSubscribed) {
+                btn.classList.add('subscribed');
+                btn.innerHTML = '<span>✓</span><span>' + i18n[currentLang].subscribed + '</span>';
+            } else {
+                btn.classList.remove('subscribed');
+                btn.innerHTML = '<span>💬</span><span>' + i18n[currentLang].subscribeBtn + '</span>';
+            }
+        }
+
+        // Initialize subscribe button state
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSubscribeButton();
+        });
+
+        // Close modal on outside click
+        document.getElementById('subscribe-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSubscribeModal();
+            }
+        });
     </script>
+
+    <!-- Subscribe Modal -->
+    <div class="subscribe-modal" id="subscribe-modal">
+        <div class="subscribe-modal-content">
+            <div class="subscribe-modal-title" id="subscribe-modal-title" data-i18n="subscribeTitle">订阅价格提醒</div>
+            <div class="subscribe-modal-desc" id="subscribe-modal-desc" data-i18n="subscribeDesc">输入您的钉钉工号，当价格变动或有新模型发布时，您将收到钉钉通知</div>
+            <input type="text" class="subscribe-input" id="subscribe-input" placeholder="123456" maxlength="6">
+            <div class="subscribe-error" id="subscribe-error" data-i18n="subscribeError">请输入6位数字工号</div>
+            <div class="subscribe-actions">
+                <button class="subscribe-cancel" onclick="closeSubscribeModal()" data-i18n="cancel">取消</button>
+                <button class="subscribe-confirm" id="subscribe-confirm-btn" data-i18n="subscribe">订阅</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
