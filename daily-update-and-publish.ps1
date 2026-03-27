@@ -125,6 +125,40 @@ Write-Log "Step 4: Fetching Aliyun prices..."
 # For now, we validate the current data structure
 Write-Log "Aliyun data validation: Checking model structure..."
 
+# ============================================================================
+# STEP 5: Fetch Bytedance prices (Puppeteer + fallback)
+# ============================================================================
+Write-Log "Step 5: Fetching Bytedance prices..."
+
+$bytedanceFetchScript = Join-Path $scriptDir "fetch-bytedance-prices.ps1"
+$bytedanceSource = "baseline"
+
+if (Test-Path $bytedanceFetchScript) {
+    try {
+        & $bytedanceFetchScript -DryRun:$DryRun 2>&1 | ForEach-Object { Write-Log $_ }
+        $bytedanceExitCode = $LASTEXITCODE
+
+        if ($bytedanceExitCode -eq 0) {
+            $bytedanceSource = "scraped"
+            Write-Log "Bytedance prices fetched successfully via Puppeteer"
+        } else {
+            Write-Log "Bytedance scraper used baseline data (exit code: $bytedanceExitCode)" -Level "WARNING"
+        }
+
+        # Read fetched data
+        $bytedanceDataPath = Join-Path $scriptDir "bytedance-prices.json"
+        if (Test-Path $bytedanceDataPath) {
+            $bytedanceData = Get-Content $bytedanceDataPath -Raw | ConvertFrom-Json
+            Write-Log "Loaded Bytedance data: $($bytedanceData.language.Count) language models"
+        }
+    } catch {
+        Write-Log "Bytedance fetch error: $_" -Level "WARNING"
+        Write-Log "Continuing with baseline data..."
+    }
+} else {
+    Write-Log "Bytedance fetch script not found, using baseline" -Level "WARNING"
+}
+
 $requiredModels = @(
     @{ Name = "qwen3-max"; Level = "Flagship"; MinPrice = 2.0; MaxPrice = 10.0 },
     @{ Name = "qwen3.5-plus"; Level = "Pro"; MinPrice = 0.5; MaxPrice = 5.0 },
@@ -144,11 +178,12 @@ if ($validationErrors.Count -gt 0) {
 }
 
 Write-Log "Aliyun data validation: PASSED"
+Write-Log "Bytedance data source: $bytedanceSource"
 
 # ============================================================================
-# STEP 5: Update metadata
+# STEP 6: Update metadata
 # ============================================================================
-Write-Log "Step 5: Updating metadata..."
+Write-Log "Step 6: Updating metadata..."
 
 if ($lastUpdated -eq $today) {
     Write-Log "Data is already up to date for today"
@@ -172,9 +207,9 @@ if ($lastUpdated -eq $today) {
 }
 
 # ============================================================================
-# STEP 6: Run data validation
+# STEP 7: Run data validation
 # ============================================================================
-Write-Log "Step 6: Running data validation..."
+Write-Log "Step 7: Running data validation..."
 
 $validateScript = Join-Path $scriptDir "validate-data.ps1"
 if (Test-Path $validateScript) {
@@ -197,10 +232,10 @@ if (Test-Path $validateScript) {
 }
 
 # ============================================================================
-# STEP 7: Update performance comparison (if new dominating models detected)
+# STEP 8: Update performance comparison (if new dominating models detected)
 # ============================================================================
 if ($requiresModelSelection) {
-    Write-Log "Step 7: Updating performance comparison for new dominating models..."
+    Write-Log "Step 8: Updating performance comparison for new dominating models..."
 
     # In production, this would:
     # 1. Call Model Selection subagent to evaluate new models
@@ -213,13 +248,13 @@ if ($requiresModelSelection) {
     # Add to changes file
     $changesData.newModels = @("New dominating models detected - review required")
 } else {
-    Write-Log "Step 7: No performance update needed (no new dominating models)"
+    Write-Log "Step 8: No performance update needed (no new dominating models)"
 }
 
 # ============================================================================
-# STEP 8: Generate latest-changes.json
+# STEP 9: Generate latest-changes.json
 # ============================================================================
-Write-Log "Step 8: Generating latest-changes.json..."
+Write-Log "Step 9: Generating latest-changes.json..."
 
 $changesFile = Join-Path $scriptDir "latest-changes.json"
 $changesData = @{
@@ -241,10 +276,10 @@ if (-not $DryRun) {
 }
 
 # ============================================================================
-# STEP 9: Git commit and push
+# STEP 10: Git commit and push
 # ============================================================================
 if (-not $SkipGitPush) {
-    Write-Log "Step 9: Git commit and push..."
+    Write-Log "Step 10: Git commit and push..."
     
     # Check if we're in a git repository
     $gitDir = Join-Path $scriptDir ".git"
@@ -285,16 +320,17 @@ if (-not $SkipGitPush) {
         }
     }
 } else {
-    Write-Log "Step 9: Skipped (SkipGitPush enabled)"
+    Write-Log "Step 10: Skipped (SkipGitPush enabled)"
 }
 
 # ============================================================================
-# STEP 10: Summary
+# STEP 11: Summary
 # ============================================================================
 Write-Log "=== Daily Update & Publish Completed ==="
 Write-Log "Summary:"
 Write-Log "  - New models detected: $newModelsDetected"
 Write-Log "  - Model Selection review required: $requiresModelSelection"
+Write-Log "  - Bytedance data source: $bytedanceSource"
 Write-Log "  - Stale files cleaned: $cleanedCount"
 Write-Log "  - Data updated: $hasChanges"
 Write-Log "  - Validation: PASSED"
