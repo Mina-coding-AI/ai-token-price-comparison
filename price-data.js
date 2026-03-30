@@ -28,7 +28,8 @@
           desc: "性能与成本平衡",
           tiers: [
             { range: "0-128K", input: 0.8, output: 4.8 },
-            { range: "128K-256K", input: 2.0, output: 12.0 }
+            { range: "128K-256K", input: 2.0, output: 12.0 },
+            { range: "256K-1M", input: 4.0, output: 24.0 }
           ]
         },
         {
