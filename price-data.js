@@ -91,9 +91,9 @@
           level: "Vision Plus",
           desc: "平衡视觉理解",
           tiers: [
-            { range: "0-128K", input: 1.0, output: 10.0 },
-            { range: "128K-256K", input: 2.0, output: 20.0 },
-            { range: "256K-1M", input: 3.0, output: 30.0 }
+            { range: "0-32K", input: 1.0, output: 10.0 },
+            { range: "32K-128K", input: 1.5, output: 15.0 },
+            { range: "128K-256K", input: 3.0, output: 30.0 }
           ]
         },
         {
