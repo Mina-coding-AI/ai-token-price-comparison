@@ -1,12 +1,16 @@
-{
-  "date": "2026-03-27",
-  "updateTime": "10:00 AM Beijing Time",
-  "summary": "No price changes detected. All model prices remain stable.",
-  "changes": [],
-  "newModels": [],
-  "verified": true,
-  "sources": {
-    "aliyun": "https://help.aliyun.com/help/json/document_detail.json?nodeId=2840914",
-    "bytedance": "https://www.volcengine.com/docs/82379/1544106"
-  }
+﻿{
+    "newModels":  [
+
+                  ],
+    "verified":  true,
+    "sources":  {
+                    "aliyun":  "https://help.aliyun.com/help/json/document_detail.json?nodeId=2840914",
+                    "bytedance":  "https://www.volcengine.com/docs/82379/1544106"
+                },
+    "date":  "2026-03-30",
+    "summary":  "Metadata updated to 2026-03-30",
+    "updateTime":  "10:00 AM Beijing Time",
+    "changes":  [
+
+                ]
 }

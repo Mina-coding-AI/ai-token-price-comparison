@@ -1,0 +1,44 @@
+[2026-03-30 10:00:29] [INFO] === Model Monitor Started ===
+[2026-03-30 10:00:29] [INFO] DryRun: False
+[2026-03-30 10:00:29] [INFO] Checking Qwen (Aliyun) for new models...
+[2026-03-30 10:00:29] [INFO] Fetching from https://qwen.ai/blog
+[2026-03-30 10:00:29] [INFO] Checking for pattern: qwen4
+[2026-03-30 10:00:29] [INFO] Checking for pattern: qwen3.6
+[2026-03-30 10:00:29] [INFO] Checking for pattern: qwen3-max-2026
+[2026-03-30 10:00:29] [INFO] Qwen check completed - no new dominating models detected (baseline check)
+[2026-03-30 10:00:29] [INFO] Checking Seed (Bytedance) for new models...
+[2026-03-30 10:00:29] [INFO] Fetching from https://seed.bytedance.com/en/blog
+[2026-03-30 10:00:29] [INFO] Checking for pattern: seed-3.0
+[2026-03-30 10:00:29] [INFO] Checking for pattern: seed-2.5
+[2026-03-30 10:00:29] [INFO] Checking for pattern: seed-2.0-update
+[2026-03-30 10:00:29] [INFO] Seed check completed - no new dominating models detected (baseline check)
+[2026-03-30 10:00:29] [INFO] Checking LMSYS Chatbot Arena for ranking changes...
+[2026-03-30 10:00:29] [INFO] Checking LMSYS leaderboard at https://chat.lmsys.org/
+[2026-03-30 10:00:29] [INFO] LMSYS check completed - no significant ranking changes detected
+[2026-03-30 10:00:29] [INFO] === Model Monitor Summary ===
+[2026-03-30 10:00:29] [INFO] No new dominating models detected
+[2026-03-30 10:00:29] [INFO] Monitor result saved to: C:\Users\Mina\.qoderwork\workspace\mmx9zaoqehlqlg3w\outputs\monitor-result.json
+[2026-03-30 10:00:29] [INFO] === Model Monitor Completed ===
+[2026-03-30 10:00:29] [INFO] Log file: C:\Users\Mina\.qoderwork\workspace\mmx9zaoqehlqlg3w\outputs\logs\model-monitor-2026-03-30.log
+[2026-03-30 10:01:19] [INFO] === Model Monitor Started ===
+[2026-03-30 10:01:19] [INFO] DryRun: False
+[2026-03-30 10:01:19] [INFO] Checking Qwen (Aliyun) for new models...
+[2026-03-30 10:01:19] [INFO] Fetching from https://qwen.ai/blog
+[2026-03-30 10:01:19] [INFO] Checking for pattern: qwen4
+[2026-03-30 10:01:19] [INFO] Checking for pattern: qwen3.6
+[2026-03-30 10:01:19] [INFO] Checking for pattern: qwen3-max-2026
+[2026-03-30 10:01:19] [INFO] Qwen check completed - no new dominating models detected (baseline check)
+[2026-03-30 10:01:19] [INFO] Checking Seed (Bytedance) for new models...
+[2026-03-30 10:01:19] [INFO] Fetching from https://seed.bytedance.com/en/blog
+[2026-03-30 10:01:19] [INFO] Checking for pattern: seed-3.0
+[2026-03-30 10:01:19] [INFO] Checking for pattern: seed-2.5
+[2026-03-30 10:01:19] [INFO] Checking for pattern: seed-2.0-update
+[2026-03-30 10:01:19] [INFO] Seed check completed - no new dominating models detected (baseline check)
+[2026-03-30 10:01:19] [INFO] Checking LMSYS Chatbot Arena for ranking changes...
+[2026-03-30 10:01:19] [INFO] Checking LMSYS leaderboard at https://chat.lmsys.org/
+[2026-03-30 10:01:19] [INFO] LMSYS check completed - no significant ranking changes detected
+[2026-03-30 10:01:19] [INFO] === Model Monitor Summary ===
+[2026-03-30 10:01:19] [INFO] No new dominating models detected
+[2026-03-30 10:01:19] [INFO] Monitor result saved to: C:\Users\Mina\.qoderwork\workspace\mmx9zaoqehlqlg3w\outputs\monitor-result.json
+[2026-03-30 10:01:19] [INFO] === Model Monitor Completed ===
+[2026-03-30 10:01:19] [INFO] Log file: C:\Users\Mina\.qoderwork\workspace\mmx9zaoqehlqlg3w\outputs\logs\model-monitor-2026-03-30.log
