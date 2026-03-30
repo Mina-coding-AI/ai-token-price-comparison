@@ -18,7 +18,7 @@
           tiers: [
             { range: "0-32K", input: 2.5, output: 10.0 },
             { range: "32K-128K", input: 4.0, output: 16.0 },
-            { range: "128K-256K", input: 7.0, output: 28.0 }
+            { range: "128K-252K", input: 7.0, output: 28.0 }
           ]
         },
         {
@@ -28,8 +28,7 @@
           desc: "性能与成本平衡",
           tiers: [
             { range: "0-128K", input: 0.8, output: 4.8 },
-            { range: "128K-256K", input: 2.4, output: 12.0 },
-            { range: "256K-1M", input: 4.0, output: 24.0 }
+            { range: "128K-256K", input: 2.0, output: 12.0 }
           ]
         },
         {
@@ -39,8 +38,7 @@
           desc: "极速响应",
           tiers: [
             { range: "0-128K", input: 0.2, output: 2.0 },
-            { range: "128K-256K", input: 0.6, output: 6.0 },
-            { range: "256K-1M", input: 1.2, output: 12.0 }
+            { range: "128K-256K", input: 0.8, output: 8.0 }
           ]
         }
       ],
@@ -51,9 +49,9 @@
           level: "Coder Pro",
           desc: "代码生成与补全",
           tiers: [
-            { range: "0-128K", input: 4.0, output: 16.0 },
-            { range: "128K-256K", input: 12.0, output: 80.0 },
-            { range: "256K-1M", input: 20.0, output: 200.0 }
+            { range: "0-32K", input: 4.0, output: 16.0 },
+            { range: "32K-128K", input: 6.0, output: 24.0 },
+            { range: "128K-256K", input: 10.0, output: 40.0 }
           ]
         },
         {
