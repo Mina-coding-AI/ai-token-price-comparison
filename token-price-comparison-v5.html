@@ -635,7 +635,8 @@
         <!-- Date Selector -->
         <div class="date-selector-container" style="text-align: center; margin: 20px 0; padding: 16px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);">
             <label for="date-selector" style="margin-right: 12px; color: var(--text-secondary);" data-i18n="selectDate">选择日期：</label>
-            <input type="date" id="date-selector" min="2026-03-25" lang="en" placeholder="YYYY-MM-DD" style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 1rem;" onchange="handleDateChange(this.value)">
+            <input type="text" id="date-selector-display" readonly placeholder="YYYY-MM-DD" style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 1rem; cursor: pointer; width: 140px; text-align: center;" onclick="document.getElementById('date-selector').click()">
+            <input type="date" id="date-selector" min="2026-03-25" lang="en" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;" onchange="handleDateChange(this.value)">
             <span style="margin-left: 12px; font-size: 0.85rem; color: var(--text-secondary);" data-i18n="dateNote">* 仅支持 2026-03-25 及之后的价格数据</span>
         </div>
 
@@ -1525,14 +1526,18 @@
         function handleDateChange(selectedDate) {
             const t = i18n[currentLang];
             if (!selectedDate) return;
-            
+
+            // Update the display input
+            document.getElementById('date-selector-display').value = selectedDate;
+
             const minDate = '2026-03-25';
             if (selectedDate < minDate) {
                 alert(currentLang === 'zh' ? '请选择 2026-03-25 或之后的日期' : 'Please select a date on or after 2026-03-25');
                 document.getElementById('date-selector').value = D.metadata.lastUpdated;
+                document.getElementById('date-selector-display').value = D.metadata.lastUpdated;
                 return;
             }
-            
+
             // Check if we have data for this date
             const dateIndex = D.history.dates.indexOf(selectedDate);
             if (dateIndex === -1) {
@@ -1540,17 +1545,17 @@
                 renderAll(D);
                 return;
             }
-            
+
             // Create a temporary data object with historical prices
             const historicalData = JSON.parse(JSON.stringify(D));
             historicalData.metadata.lastUpdated = selectedDate;
-            
+
             // Update current prices to historical values
             Object.keys(D.history.models).forEach(modelName => {
                 const modelHistory = D.history.models[modelName];
                 const historicalInput = modelHistory.input[dateIndex];
                 const historicalOutput = modelHistory.output[dateIndex];
-                
+
                 // Find and update the model in historicalData
                 ['aliyun', 'bytedance'].forEach(provider => {
                     ['language', 'code', 'vision'].forEach(category => {
@@ -1566,7 +1571,7 @@
                     });
                 });
             });
-            
+
             renderAll(historicalData);
         }
 
@@ -1592,9 +1597,9 @@
         setInterval(updateNextUpdateTime, 60000);
 
         function updateDatePickerPlaceholder() {
-            const datePicker = document.getElementById('date-selector');
-            if (datePicker) {
-                datePicker.placeholder = currentLang === 'zh' ? '选择日期' : 'Select Date';
+            const datePickerDisplay = document.getElementById('date-selector-display');
+            if (datePickerDisplay) {
+                datePickerDisplay.placeholder = currentLang === 'zh' ? '选择日期' : 'YYYY-MM-DD';
             }
         }
 
