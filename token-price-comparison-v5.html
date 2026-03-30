@@ -565,20 +565,18 @@
                 <button class="lang-btn active" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
                 <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">English</button>
             </div>
-            <div style="display: flex; align-items: center; gap: 16px;">
-                <button class="subscribe-btn" id="subscribe-btn" onclick="openSubscribeModal()">
-                    <span>💬</span>
-                    <span data-i18n="subscribeBtn">订阅提醒</span>
-                </button>
-                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
-                    <div class="update-badge">
-                        <span class="icon"></span>
-                        <span data-i18n="updateSchedule">每日上午 10:00 (北京时间) 自动更新</span>
-                        <span class="next-update" id="next-update"></span>
-                    </div>
-                    <div class="last-updated" id="last-updated"></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1;">
+                <div class="update-badge">
+                    <span class="icon"></span>
+                    <span data-i18n="updateSchedule">每日上午 10:00 (北京时间) 自动更新</span>
+                    <span class="next-update" id="next-update"></span>
                 </div>
+                <div class="last-updated" id="last-updated"></div>
             </div>
+            <button class="subscribe-btn" id="subscribe-btn" onclick="openSubscribeModal()">
+                <span>💬</span>
+                <span data-i18n="subscribeBtn">订阅提醒</span>
+            </button>
         </div>
 
         <!-- Notification Banner -->
@@ -637,7 +635,7 @@
         <!-- Date Selector -->
         <div class="date-selector-container" style="text-align: center; margin: 20px 0; padding: 16px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);">
             <label for="date-selector" style="margin-right: 12px; color: var(--text-secondary);" data-i18n="selectDate">选择日期：</label>
-            <input type="date" id="date-selector" min="2026-03-25" style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 1rem;" onchange="handleDateChange(this.value)">
+            <input type="date" id="date-selector" min="2026-03-25" lang="en" style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 1rem;" onchange="handleDateChange(this.value)">
             <span style="margin-left: 12px; font-size: 0.85rem; color: var(--text-secondary);" data-i18n="dateNote">* 仅支持 2026-03-25 及之后的价格数据</span>
         </div>
 
@@ -1164,6 +1162,7 @@
                 if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
             });
             document.getElementById('page-title').textContent = i18n[lang].pageTitle + ' | Aliyun vs Bytedance';
+            updateSubscribeButton();
             if (D) { updateMetaInfo(); renderAllTables(); }
         }
 
