@@ -18,10 +18,12 @@ The current quality control system has **critical gaps** that allowed incorrect 
 | Gap | Impact | Example |
 |-----|--------|---------|
 | No live price validation | Wrong prices deployed | qwen3-vl-plus tier 2: ¥2/¥20 vs correct ¥1.5/¥15 |
-| No tier structure validation | Non-existent tiers added | qwen3.5-plus has 256K-1M tier that doesn't exist |
+| No tier structure validation | Missing tiers not detected | qwen3-coder-plus had only 3 tiers, official has 4 |
+| No tier count verification | Tiers incorrectly removed | qwen3.5-flash 3rd tier removed when it should exist |
 | No price range validation | Absurd prices accepted | qwen3-coder-plus tier 3: ¥20/¥200 vs correct ¥10/¥40 |
 | Static baseline data | Outdated prices persist | qwen3.5-flash tier 2 still shows old ¥0.6/¥6 |
 | No cross-reference checks | Fabricated data not caught | Multiple models have invented price points |
+| No completeness validation | Missing data not detected | Bytedance prices never validated against source |
 
 ### 1.2 Why the Quality Subagent Missed It
 
@@ -35,6 +37,33 @@ The QUALITY_AUDIT_REPORT.md (2026-03-26) focused on:
 
 **Root Cause**: The quality subagent validated the *format* of data, not the *accuracy* of data.
 
+### 1.3 Key Lessons Learned (2026-03-30)
+
+**Lesson 1: Validate Tier Count FIRST**
+- Always check `model.tiers.length === official.tiers.length` before checking individual tier prices
+- A missing tier is a COMPLETENESS error, not just a correctness error
+- Example: qwen3-coder-plus has 4 tiers in official, but data had only 3
+
+**Lesson 2: Don't Trust Single Fetch**
+- WebFetch may return partial data (e.g., only first 2 tiers visible)
+- Official pages may have expandable sections or dynamic content
+- Must verify ALL tiers are visible before validation
+
+**Lesson 3: Baseline Comparison is Critical**
+- Compare new data against previous known-good baseline
+- Flag ANY structural changes (tier additions/removals) for review
+- Price changes are expected; tier structure changes are suspicious
+
+**Lesson 4: Two-Step Validation Required**
+1. **COMPLETENESS**: Count models, count tiers per model
+2. **CORRECTIVENESS**: Validate each tier's price values
+- Both steps must pass for approval
+
+**Lesson 5: Both Providers Need Equal Attention**
+- Aliyun validation was done (after errors found)
+- Bytedance validation was never completed
+- Both sources must be validated before deployment
+
 ---
 
 ## 2. Multi-Layer Quality Control Framework
@@ -43,31 +72,97 @@ The QUALITY_AUDIT_REPORT.md (2026-03-26) focused on:
 **When**: Before writing to price-data.js
 **What**: Fetch and compare against official sources
 
+#### Step 1: COMPLETENESS Validation (Tier Count Check)
+
 ```javascript
-// Pseudo-code for Aliyun validation
-async function validateAliyunPrices(proposedData) {
-  const officialPrices = await fetchAliyunOfficialPrices();
+// FIRST: Validate tier counts before checking prices
+function validateCompleteness(proposedData, officialData) {
+  const errors = [];
+  
+  for (const provider of ['aliyun', 'bytedance']) {
+    for (const category of ['language', 'code', 'vision']) {
+      const proposedModels = proposedData.current[provider][category] || [];
+      const officialModels = officialData[provider][category] || [];
+      
+      // Check model count matches
+      if (proposedModels.length !== officialModels.length) {
+        errors.push({
+          provider,
+          category,
+          issue: `Model count mismatch: ${proposedModels.length} vs ${officialModels.length}`,
+          severity: 'CRITICAL'
+        });
+      }
+      
+      // Check each model's tier count
+      for (const proposed of proposedModels) {
+        const official = officialModels.find(m => m.name === proposed.name);
+        if (!official) {
+          errors.push({
+            provider,
+            model: proposed.name,
+            issue: 'Model not found in official source',
+            severity: 'CRITICAL'
+          });
+          continue;
+        }
+        
+        if (proposed.tiers.length !== official.tiers.length) {
+          errors.push({
+            provider,
+            model: proposed.name,
+            issue: `Tier count mismatch: ${proposed.tiers.length} vs ${official.tiers.length}`,
+            proposedTiers: proposed.tiers.map(t => t.range),
+            officialTiers: official.tiers.map(t => t.range),
+            severity: 'CRITICAL'
+          });
+        }
+      }
+    }
+  }
+  
+  return errors;
+}
+```
+
+#### Step 2: CORRECTIVENESS Validation (Price Check)
+
+```javascript
+// SECOND: Validate individual tier prices
+async function validateCorrectness(proposedData, officialData) {
   const discrepancies = [];
   
-  for (const model of proposedData.aliyun) {
-    const official = officialPrices.find(m => m.name === model.name);
-    if (!official) {
-      discrepancies.push({ model: model.name, issue: 'Model not found in official source' });
-      continue;
+  for (const provider of ['aliyun', 'bytedance']) {
+    for (const category of ['language', 'code', 'vision']) {
+      for (const proposed of proposedData.current[provider][category] || []) {
+        const official = findOfficialModel(officialData, provider, proposed.name);
+        if (!official) continue;
+        
+        // Skip if tier count doesn't match (already caught in completeness check)
+        if (proposed.tiers.length !== official.tiers.length) continue;
+        
+        // Check each tier's prices
+        for (let i = 0; i < proposed.tiers.length; i++) {
+          const pTier = proposed.tiers[i];
+          const oTier = official.tiers[i];
+          
+          if (pTier.input !== oTier.input || pTier.output !== oTier.output) {
+            discrepancies.push({
+              provider,
+              model: proposed.name,
+              tier: pTier.range,
+              proposed: { input: pTier.input, output: pTier.output },
+              official: { input: oTier.input, output: oTier.output },
+              severity: 'HIGH'
+            });
+          }
+        }
+      }
     }
-    
-    // Check tier count matches
-    if (model.tiers.length !== official.tiers.length) {
-      discrepancies.push({ 
-        model: model.name, 
-        issue: `Tier count mismatch: ${model.tiers.length} vs ${official.tiers.length}` 
-      });
-    }
-    
-    // Check each tier
-    for (let i = 0; i < model.tiers.length; i++) {
-      const proposed = model.tiers[i];
-      const officialTier = official.tiers[i];
+  }
+  
+  return discrepancies;
+}
       
       if (proposed.input !== officialTier.input || proposed.output !== officialTier.output) {
         discrepancies.push({
