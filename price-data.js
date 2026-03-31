@@ -1,6 +1,6 @@
 ﻿window.PRICE_DATA = {
   metadata: {
-    lastUpdated: "2026-03-30",
+    lastUpdated: "2026-03-31",
     updateTime: "10:00 AM Beijing Time",
     sources: {
       aliyun: "https://help.aliyun.com/help/json/document_detail.json?nodeId=2840914",
@@ -349,4 +349,5 @@
     }
   }
 };
+
 
