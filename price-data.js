@@ -1,7 +1,7 @@
 window.PRICE_DATA = {
   metadata: {
     lastUpdated: "2026-04-02",
-    updateTime: "10:07 ÉÏÎç Beijin¹«Ôª Ti7e",
+    updateTime: "10:07 AM Beijing Time",
     sources: {
       aliyun: "https://help.aliyun.com/help/json/document_detail.json?nodeId=2840914",
       bytedance: "https://www.volcengine.com/docs/82379/1544106"
@@ -14,7 +14,7 @@ window.PRICE_DATA = {
           name: "qwen3-max",
           displayName: "Flagship",
           level: "Flagship",
-          desc: "×î¸ßÄÜÁ¦£¬¸´ÔÓÍÆÀí",
+          desc: "æœ€é«˜èƒ½åŠ›ï¼Œå¤æ‚æ¨ç†",
           tiers: [
             { range: "0-32K", input: 2.5, output: 10.0 },
             { range: "32K-128K", input: 4.0, output: 16.0 },
@@ -25,7 +25,7 @@ window.PRICE_DATA = {
           name: "qwen3.5-plus",
           displayName: "Pro",
           level: "Pro",
-          desc: "ĞÔÄÜÓë³É±¾Æ½ºâ",
+          desc: "æ€§èƒ½ä¸æˆæœ¬å¹³è¡¡",
           tiers: [
             { range: "0-128K", input: 0.8, output: 4.8 },
             { range: "128K-256K", input: 2.0, output: 12.0 },
@@ -36,7 +36,7 @@ window.PRICE_DATA = {
           name: "qwen3.5-flash",
           displayName: "Flash",
           level: "Flash",
-          desc: "¼«ËÙÏìÓ¦",
+          desc: "æé€Ÿå“åº”",
           tiers: [
             { range: "0-128K", input: 0.2, output: 2.0 },
             { range: "128K-256K", input: 0.8, output: 8.0 },
@@ -49,7 +49,7 @@ window.PRICE_DATA = {
           name: "qwen3-coder-plus",
           displayName: "Coder Pro",
           level: "Coder Pro",
-          desc: "´úÂëÉú³ÉÓë²¹È«",
+          desc: "ä»£ç ç”Ÿæˆä¸è¡¥å…¨",
           tiers: [
             { range: "0-32K", input: 4.0, output: 16.0 },
             { range: "32K-128K", input: 6.0, output: 24.0 },
@@ -61,18 +61,18 @@ window.PRICE_DATA = {
           name: "qwen-coder-turbo",
           displayName: "Coder Lite",
           level: "Coder",
-          desc: "¿ìËÙ´úÂëÉú³É",
+          desc: "å¿«é€Ÿä»£ç ç”Ÿæˆ",
           tiers: [
-            { range: "ÎŞ½×Ìİ", input: 2.0, output: 6.0 }
+            { range: "æ— é˜¶æ¢¯", input: 2.0, output: 6.0 }
           ]
         },
         {
           name: "qwq-32b",
           displayName: "Reasoning",
           level: "Reasoning",
-          desc: "Éî¶ÈÍÆÀí",
+          desc: "æ·±åº¦æ¨ç†",
           tiers: [
-            { range: "ÎŞ½×Ìİ", input: 1.6, output: 4.0 }
+            { range: "æ— é˜¶æ¢¯", input: 1.6, output: 4.0 }
           ]
         }
       ],
@@ -81,16 +81,16 @@ window.PRICE_DATA = {
           name: "qwen-vl-max",
           displayName: "Vision Max",
           level: "Vision Max",
-          desc: "¸ß¼¶Í¼ÏñÀí½â",
+          desc: "é«˜çº§å›¾åƒç†è§£",
           tiers: [
-            { range: "ÎŞ½×Ìİ", input: 1.6, output: 4.0 }
+            { range: "æ— é˜¶æ¢¯", input: 1.6, output: 4.0 }
           ]
         },
         {
           name: "qwen3-vl-plus",
           displayName: "Vision Plus",
           level: "Vision Plus",
-          desc: "Æ½ºâÊÓ¾õÀí½â",
+          desc: "å¹³è¡¡è§†è§‰ç†è§£",
           tiers: [
             { range: "0-32K", input: 1.0, output: 10.0 },
             { range: "32K-128K", input: 1.5, output: 15.0 },
@@ -101,7 +101,7 @@ window.PRICE_DATA = {
           name: "qwen-omni",
           displayName: "Omni",
           level: "Omni",
-          desc: "È«Ä£Ì¬Àí½â",
+          desc: "å…¨æ¨¡æ€ç†è§£",
           tiers: [
             { range: "0-128K", input: 1.8, output: 6.9 }
           ]
@@ -110,7 +110,7 @@ window.PRICE_DATA = {
           name: "qvq-max",
           displayName: "Visual Reasoning",
           level: "Visual Reasoning",
-          desc: "ÊÓ¾õÍÆÀí·ÖÎö",
+          desc: "è§†è§‰æ¨ç†åˆ†æ",
           tiers: [
             { range: "0-128K", input: 8.0, output: 32.0 }
           ]
@@ -125,7 +125,8 @@ window.PRICE_DATA = {
         {
           name: "wanxiang-2.1-t2i",
           price: 0.20,
-          unit: "per_image"
+          unit: "per_image",
+          desc: "é€šç”¨å›¾åƒç”Ÿæˆ"
         }
       ],
       video: [
@@ -133,7 +134,7 @@ window.PRICE_DATA = {
           name: "wanxiang-video",
           price: 0.50,
           unit: "per_video",
-          notes: "°´³¤¶È±ä»¯"
+          notes: "æŒ‰é•¿åº¦å˜åŒ–"
         }
       ]
     },
@@ -143,7 +144,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-2.0-pro",
           displayName: "Flagship",
           level: "Flagship",
-          desc: "Æì½¢°æ£¬×îÇ¿ÄÜÁ¦",
+          desc: "æ——èˆ°ç‰ˆï¼Œæœ€å¼ºèƒ½åŠ›",
           tiers: [
             { range: "0-32K", input: 3.2, output: 16.0 },
             { range: "32K-128K", input: 4.8, output: 24.0 },
@@ -154,7 +155,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-2.0-lite",
           displayName: "Pro",
           level: "Pro",
-          desc: "¸ßĞÔÄÜÍ¨ÓÃÄ£ĞÍ",
+          desc: "é«˜æ€§èƒ½é€šç”¨æ¨¡å‹",
           tiers: [
             { range: "0-32K", input: 0.6, output: 3.6 },
             { range: "32K-128K", input: 0.9, output: 5.4 },
@@ -165,7 +166,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-2.0-mini",
           displayName: "Flash",
           level: "Flash",
-          desc: "ÇáÁ¿°æ£¬¾­¼ÃÊµ»İ",
+          desc: "è½»é‡ç‰ˆï¼Œç»æµå®æƒ ",
           tiers: [
             { range: "0-32K", input: 0.2, output: 2.0 },
             { range: "32K-128K", input: 0.4, output: 4.0 },
@@ -176,7 +177,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-1.6-flash",
           displayName: "Flash",
           level: "Flash",
-          desc: "¼«ËÙ°æ£¬×îµÍ³É±¾",
+          desc: "æé€Ÿç‰ˆï¼Œæœ€ä½æˆæœ¬",
           tiers: [
             { range: "0-32K", input: 0.15, output: 1.5 },
             { range: "32K-128K", input: 0.3, output: 3.0 },
@@ -187,18 +188,18 @@ window.PRICE_DATA = {
           name: "doubao-1.5-pro-32k",
           displayName: "Pro 32K",
           level: "Pro",
-          desc: "¸ßĞÔÄÜ³¤ÉÏÏÂÎÄ",
+          desc: "é«˜æ€§èƒ½é•¿ä¸Šä¸‹æ–‡",
           tiers: [
-            { range: "ÎŞ½×Ìİ", input: 0.8, output: 2.0 }
+            { range: "æ— é˜¶æ¢¯", input: 0.8, output: 2.0 }
           ]
         },
         {
           name: "doubao-1.5-lite-32k",
           displayName: "Lite 32K",
           level: "Lite",
-          desc: "ÇáÁ¿³¤ÉÏÏÂÎÄ",
+          desc: "è½»é‡é•¿ä¸Šä¸‹æ–‡",
           tiers: [
-            { range: "ÎŞ½×Ìİ", input: 0.3, output: 0.6 }
+            { range: "æ— é˜¶æ¢¯", input: 0.3, output: 0.6 }
           ]
         }
       ],
@@ -207,7 +208,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-2.0-code",
           displayName: "Coder Pro",
           level: "Coder Pro",
-          desc: "´úÂëÉú³ÉÓë²¹È«",
+          desc: "ä»£ç ç”Ÿæˆä¸è¡¥å…¨",
           tiers: [
             { range: "0-32K", input: 3.2, output: 16.0 },
             { range: "32K-128K", input: 4.8, output: 24.0 },
@@ -218,7 +219,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-code",
           displayName: "Coder",
           level: "Coder",
-          desc: "Í¨ÓÃ´úÂëÄ£ĞÍ",
+          desc: "é€šç”¨ä»£ç æ¨¡å‹",
           tiers: [
             { range: "0-32K", input: 1.2, output: 8.0 },
             { range: "32K-128K", input: 1.4, output: 12.0 },
@@ -231,25 +232,25 @@ window.PRICE_DATA = {
           name: "doubao-1.5-vision-pro",
           displayName: "Vision Max",
           level: "Vision Max",
-          desc: "×¨ÒµÊÓ¾õÀí½â",
+          desc: "ä¸“ä¸šè§†è§‰ç†è§£",
           tiers: [
-            { range: "ÎŞ½×Ìİ", input: 3.0, output: 9.0 }
+            { range: "æ— é˜¶æ¢¯", input: 3.0, output: 9.0 }
           ]
         },
         {
           name: "doubao-1.5-vision-lite",
           displayName: "Vision Lite",
           level: "Vision Lite",
-          desc: "ÇáÁ¿ÊÓ¾õÀí½â",
+          desc: "è½»é‡è§†è§‰ç†è§£",
           tiers: [
-            { range: "ÎŞ½×Ìİ", input: 1.5, output: 4.5 }
+            { range: "æ— é˜¶æ¢¯", input: 1.5, output: 4.5 }
           ]
         },
         {
           name: "doubao-seed-1.6-vision",
           displayName: "Vision Plus",
           level: "Vision Plus",
-          desc: "ÊÓ¾õÀí½â",
+          desc: "è§†è§‰ç†è§£",
           tiers: [
             { range: "0-32K", input: 0.8, output: 8.0 },
             { range: "32K-128K", input: 1.2, output: 16.0 },
@@ -286,28 +287,28 @@ window.PRICE_DATA = {
       {
         name: "deepseek-v3",
         provider: "deepseek",
-        desc: "ÍÆÀíÓë±àÂë",
+        desc: "æ¨ç†ä¸ç¼–ç ",
         aliyun: { input: 2.0, output: 8.0 },
         bytedance: { input: 2.0, output: 8.0 }
       },
       {
         name: "deepseek-r1",
         provider: "deepseek",
-        desc: "Éî¶ÈÍÆÀí",
+        desc: "æ·±åº¦æ¨ç†",
         aliyun: { input: 4.0, output: 16.0 },
         bytedance: { input: 4.0, output: 16.0 }
       },
       {
         name: "kimi-k2",
         provider: "moonshot",
-        desc: "³¤ÉÏÏÂÎÄ",
+        desc: "é•¿ä¸Šä¸‹æ–‡",
         aliyun: { input: 4.0, output: 16.0 },
         bytedance: { input: 4.0, output: 16.0 }
       },
       {
         name: "glm-4",
         provider: "zhipu",
-        desc: "Í¨ÓÃ³¡¾°",
+        desc: "é€šç”¨åœºæ™¯",
         aliyun: { input: 2.0, output: 8.0 },
         bytedance: null
       }
