@@ -60,7 +60,7 @@ window.PRICE_DATA = {
         {
           name: "qwen-coder-turbo",
           displayName: "Coder Lite",
-          level: "Coder",
+          level: "Coder Lite",
           desc: "快速代码生成",
           tiers: [
             { range: "无阶梯", input: 2.0, output: 6.0 }
@@ -208,8 +208,8 @@ window.PRICE_DATA = {
         },
         {
           name: "doubao-seed-code",
-          displayName: "Coder",
-          level: "Coder",
+          displayName: "Coder Lite",
+          level: "Coder Lite",
           desc: "通用代码模型",
           tiers: [
             { range: "0-32K", input: 1.2, output: 8.0 },
