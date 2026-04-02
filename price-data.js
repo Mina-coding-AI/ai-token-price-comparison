@@ -119,24 +119,15 @@ window.PRICE_DATA = {
       image: [
         {
           name: "qwen-image-2.0",
+          displayName: "Image Gen",
+          level: "Image",
+          desc: "千问文生图 - 复杂布局与电商场景",
           price: 0.50,
           unit: "per_image"
-        },
-        {
-          name: "wanxiang-2.1-t2i",
-          price: 0.20,
-          unit: "per_image",
-          desc: "通用图像生成"
         }
       ],
-      video: [
-        {
-          name: "wanxiang-video",
-          price: 0.50,
-          unit: "per_video",
-          notes: "按长度变化"
-        }
-      ]
+      video: [],
+      audio: []
     },
     bytedance: {
       language: [
