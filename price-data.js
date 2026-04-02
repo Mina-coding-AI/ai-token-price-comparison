@@ -1,7 +1,7 @@
-ï»¿window.PRICE_DATA = {
+window.PRICE_DATA = {
   metadata: {
     lastUpdated: "2026-04-02",
-    updateTime: "10:00 AM Beijing Time",
+    updateTime: "10:07 ÉÏÎç Beijin¹«Ôª Ti7e",
     sources: {
       aliyun: "https://help.aliyun.com/help/json/document_detail.json?nodeId=2840914",
       bytedance: "https://www.volcengine.com/docs/82379/1544106"
@@ -14,7 +14,7 @@
           name: "qwen3-max",
           displayName: "Flagship",
           level: "Flagship",
-          desc: "æœ€é«˜èƒ½åŠ›ï¼Œå¤æ‚æ¨ç†",
+          desc: "×î¸ßÄÜÁ¦£¬¸´ÔÓÍÆÀí",
           tiers: [
             { range: "0-32K", input: 2.5, output: 10.0 },
             { range: "32K-128K", input: 4.0, output: 16.0 },
@@ -25,7 +25,7 @@
           name: "qwen3.5-plus",
           displayName: "Pro",
           level: "Pro",
-          desc: "æ€§èƒ½ä¸æˆæœ¬å¹³è¡¡",
+          desc: "ĞÔÄÜÓë³É±¾Æ½ºâ",
           tiers: [
             { range: "0-128K", input: 0.8, output: 4.8 },
             { range: "128K-256K", input: 2.0, output: 12.0 },
@@ -36,7 +36,7 @@
           name: "qwen3.5-flash",
           displayName: "Flash",
           level: "Flash",
-          desc: "æé€Ÿå“åº”",
+          desc: "¼«ËÙÏìÓ¦",
           tiers: [
             { range: "0-128K", input: 0.2, output: 2.0 },
             { range: "128K-256K", input: 0.8, output: 8.0 },
@@ -49,7 +49,7 @@
           name: "qwen3-coder-plus",
           displayName: "Coder Pro",
           level: "Coder Pro",
-          desc: "ä»£ç ç”Ÿæˆä¸è¡¥å…¨",
+          desc: "´úÂëÉú³ÉÓë²¹È«",
           tiers: [
             { range: "0-32K", input: 4.0, output: 16.0 },
             { range: "32K-128K", input: 6.0, output: 24.0 },
@@ -61,18 +61,18 @@
           name: "qwen-coder-turbo",
           displayName: "Coder Lite",
           level: "Coder",
-          desc: "å¿«é€Ÿä»£ç ç”Ÿæˆ",
+          desc: "¿ìËÙ´úÂëÉú³É",
           tiers: [
-            { range: "æ— é˜¶æ¢¯", input: 2.0, output: 6.0 }
+            { range: "ÎŞ½×Ìİ", input: 2.0, output: 6.0 }
           ]
         },
         {
           name: "qwq-32b",
           displayName: "Reasoning",
           level: "Reasoning",
-          desc: "æ·±åº¦æ¨ç†",
+          desc: "Éî¶ÈÍÆÀí",
           tiers: [
-            { range: "æ— é˜¶æ¢¯", input: 1.6, output: 4.0 }
+            { range: "ÎŞ½×Ìİ", input: 1.6, output: 4.0 }
           ]
         }
       ],
@@ -81,16 +81,16 @@
           name: "qwen-vl-max",
           displayName: "Vision Max",
           level: "Vision Max",
-          desc: "é«˜çº§å›¾åƒç†è§£",
+          desc: "¸ß¼¶Í¼ÏñÀí½â",
           tiers: [
-            { range: "æ— é˜¶æ¢¯", input: 1.6, output: 4.0 }
+            { range: "ÎŞ½×Ìİ", input: 1.6, output: 4.0 }
           ]
         },
         {
           name: "qwen3-vl-plus",
           displayName: "Vision Plus",
           level: "Vision Plus",
-          desc: "å¹³è¡¡è§†è§‰ç†è§£",
+          desc: "Æ½ºâÊÓ¾õÀí½â",
           tiers: [
             { range: "0-32K", input: 1.0, output: 10.0 },
             { range: "32K-128K", input: 1.5, output: 15.0 },
@@ -101,7 +101,7 @@
           name: "qwen-omni",
           displayName: "Omni",
           level: "Omni",
-          desc: "å…¨æ¨¡æ€ç†è§£",
+          desc: "È«Ä£Ì¬Àí½â",
           tiers: [
             { range: "0-128K", input: 1.8, output: 6.9 }
           ]
@@ -110,7 +110,7 @@
           name: "qvq-max",
           displayName: "Visual Reasoning",
           level: "Visual Reasoning",
-          desc: "è§†è§‰æ¨ç†åˆ†æ",
+          desc: "ÊÓ¾õÍÆÀí·ÖÎö",
           tiers: [
             { range: "0-128K", input: 8.0, output: 32.0 }
           ]
@@ -133,7 +133,7 @@
           name: "wanxiang-video",
           price: 0.50,
           unit: "per_video",
-          notes: "æŒ‰é•¿åº¦å˜åŒ–"
+          notes: "°´³¤¶È±ä»¯"
         }
       ]
     },
@@ -143,7 +143,7 @@
           name: "doubao-seed-2.0-pro",
           displayName: "Flagship",
           level: "Flagship",
-          desc: "æ——èˆ°ç‰ˆï¼Œæœ€å¼ºèƒ½åŠ›",
+          desc: "Æì½¢°æ£¬×îÇ¿ÄÜÁ¦",
           tiers: [
             { range: "0-32K", input: 3.2, output: 16.0 },
             { range: "32K-128K", input: 4.8, output: 24.0 },
@@ -154,7 +154,7 @@
           name: "doubao-seed-2.0-lite",
           displayName: "Pro",
           level: "Pro",
-          desc: "é«˜æ€§èƒ½é€šç”¨æ¨¡å‹",
+          desc: "¸ßĞÔÄÜÍ¨ÓÃÄ£ĞÍ",
           tiers: [
             { range: "0-32K", input: 0.6, output: 3.6 },
             { range: "32K-128K", input: 0.9, output: 5.4 },
@@ -165,7 +165,7 @@
           name: "doubao-seed-2.0-mini",
           displayName: "Flash",
           level: "Flash",
-          desc: "è½»é‡ç‰ˆï¼Œç»æµå®æƒ ",
+          desc: "ÇáÁ¿°æ£¬¾­¼ÃÊµ»İ",
           tiers: [
             { range: "0-32K", input: 0.2, output: 2.0 },
             { range: "32K-128K", input: 0.4, output: 4.0 },
@@ -176,7 +176,7 @@
           name: "doubao-seed-1.6-flash",
           displayName: "Flash",
           level: "Flash",
-          desc: "æé€Ÿç‰ˆï¼Œæœ€ä½æˆæœ¬",
+          desc: "¼«ËÙ°æ£¬×îµÍ³É±¾",
           tiers: [
             { range: "0-32K", input: 0.15, output: 1.5 },
             { range: "32K-128K", input: 0.3, output: 3.0 },
@@ -187,18 +187,18 @@
           name: "doubao-1.5-pro-32k",
           displayName: "Pro 32K",
           level: "Pro",
-          desc: "é«˜æ€§èƒ½é•¿ä¸Šä¸‹æ–‡",
+          desc: "¸ßĞÔÄÜ³¤ÉÏÏÂÎÄ",
           tiers: [
-            { range: "æ— é˜¶æ¢¯", input: 0.8, output: 2.0 }
+            { range: "ÎŞ½×Ìİ", input: 0.8, output: 2.0 }
           ]
         },
         {
           name: "doubao-1.5-lite-32k",
           displayName: "Lite 32K",
           level: "Lite",
-          desc: "è½»é‡é•¿ä¸Šä¸‹æ–‡",
+          desc: "ÇáÁ¿³¤ÉÏÏÂÎÄ",
           tiers: [
-            { range: "æ— é˜¶æ¢¯", input: 0.3, output: 0.6 }
+            { range: "ÎŞ½×Ìİ", input: 0.3, output: 0.6 }
           ]
         }
       ],
@@ -207,7 +207,7 @@
           name: "doubao-seed-2.0-code",
           displayName: "Coder Pro",
           level: "Coder Pro",
-          desc: "ä»£ç ç”Ÿæˆä¸è¡¥å…¨",
+          desc: "´úÂëÉú³ÉÓë²¹È«",
           tiers: [
             { range: "0-32K", input: 3.2, output: 16.0 },
             { range: "32K-128K", input: 4.8, output: 24.0 },
@@ -218,7 +218,7 @@
           name: "doubao-seed-code",
           displayName: "Coder",
           level: "Coder",
-          desc: "é€šç”¨ä»£ç æ¨¡å‹",
+          desc: "Í¨ÓÃ´úÂëÄ£ĞÍ",
           tiers: [
             { range: "0-32K", input: 1.2, output: 8.0 },
             { range: "32K-128K", input: 1.4, output: 12.0 },
@@ -231,25 +231,25 @@
           name: "doubao-1.5-vision-pro",
           displayName: "Vision Max",
           level: "Vision Max",
-          desc: "ä¸“ä¸šè§†è§‰ç†è§£",
+          desc: "×¨ÒµÊÓ¾õÀí½â",
           tiers: [
-            { range: "æ— é˜¶æ¢¯", input: 3.0, output: 9.0 }
+            { range: "ÎŞ½×Ìİ", input: 3.0, output: 9.0 }
           ]
         },
         {
           name: "doubao-1.5-vision-lite",
           displayName: "Vision Lite",
           level: "Vision Lite",
-          desc: "è½»é‡è§†è§‰ç†è§£",
+          desc: "ÇáÁ¿ÊÓ¾õÀí½â",
           tiers: [
-            { range: "æ— é˜¶æ¢¯", input: 1.5, output: 4.5 }
+            { range: "ÎŞ½×Ìİ", input: 1.5, output: 4.5 }
           ]
         },
         {
           name: "doubao-seed-1.6-vision",
           displayName: "Vision Plus",
           level: "Vision Plus",
-          desc: "è§†è§‰ç†è§£",
+          desc: "ÊÓ¾õÀí½â",
           tiers: [
             { range: "0-32K", input: 0.8, output: 8.0 },
             { range: "32K-128K", input: 1.2, output: 16.0 },
@@ -286,28 +286,28 @@
       {
         name: "deepseek-v3",
         provider: "deepseek",
-        desc: "æ¨ç†ä¸ç¼–ç ",
+        desc: "ÍÆÀíÓë±àÂë",
         aliyun: { input: 2.0, output: 8.0 },
         bytedance: { input: 2.0, output: 8.0 }
       },
       {
         name: "deepseek-r1",
         provider: "deepseek",
-        desc: "æ·±åº¦æ¨ç†",
+        desc: "Éî¶ÈÍÆÀí",
         aliyun: { input: 4.0, output: 16.0 },
         bytedance: { input: 4.0, output: 16.0 }
       },
       {
         name: "kimi-k2",
         provider: "moonshot",
-        desc: "é•¿ä¸Šä¸‹æ–‡",
+        desc: "³¤ÉÏÏÂÎÄ",
         aliyun: { input: 4.0, output: 16.0 },
         bytedance: { input: 4.0, output: 16.0 }
       },
       {
         name: "glm-4",
         provider: "zhipu",
-        desc: "é€šç”¨åœºæ™¯",
+        desc: "Í¨ÓÃ³¡¾°",
         aliyun: { input: 2.0, output: 8.0 },
         bytedance: null
       }
@@ -349,6 +349,4 @@
     }
   }
 };
-
-
 
