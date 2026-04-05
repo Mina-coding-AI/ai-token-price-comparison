@@ -1,7 +1,7 @@
 window.PRICE_DATA = {
   metadata: {
-    lastUpdated: "2026-04-02",
-    updateTime: "10:07 AM Beijing Time",
+    lastUpdated: "2026-04-05",
+    updateTime: "09:52 ���� Beijin��Ԫ Ti52e",
     sources: {
       aliyun: "https://help.aliyun.com/help/json/document_detail.json?nodeId=2840914",
       bytedance: "https://www.volcengine.com/docs/82379/1544106"
@@ -14,7 +14,7 @@ window.PRICE_DATA = {
           name: "qwen3-max",
           displayName: "Flagship",
           level: "Flagship",
-          desc: "最高能力，复杂推理",
+          desc: "Highest capability, complex reasoning",
           tiers: [
             { range: "0-32K", input: 2.5, output: 10.0 },
             { range: "32K-128K", input: 4.0, output: 16.0 },
@@ -25,7 +25,7 @@ window.PRICE_DATA = {
           name: "qwen3.5-plus",
           displayName: "Pro",
           level: "Pro",
-          desc: "性能与成本平衡",
+          desc: "Balanced performance and cost",
           tiers: [
             { range: "0-128K", input: 0.8, output: 4.8 },
             { range: "128K-256K", input: 2.0, output: 12.0 },
@@ -36,7 +36,7 @@ window.PRICE_DATA = {
           name: "qwen3.5-flash",
           displayName: "Flash",
           level: "Flash",
-          desc: "极速响应",
+          desc: "Fast response",
           tiers: [
             { range: "0-128K", input: 0.2, output: 2.0 },
             { range: "128K-256K", input: 0.8, output: 8.0 },
@@ -49,7 +49,7 @@ window.PRICE_DATA = {
           name: "qwen3-coder-plus",
           displayName: "Coder Pro",
           level: "Coder Pro",
-          desc: "代码生成与补全",
+          desc: "Code generation and completion",
           tiers: [
             { range: "0-32K", input: 4.0, output: 16.0 },
             { range: "32K-128K", input: 6.0, output: 24.0 },
@@ -61,18 +61,18 @@ window.PRICE_DATA = {
           name: "qwen-coder-turbo",
           displayName: "Coder Lite",
           level: "Coder Lite",
-          desc: "快速代码生成",
+          desc: "Fast code generation",
           tiers: [
-            { range: "无阶梯", input: 2.0, output: 6.0 }
+            { range: "flat", input: 2.0, output: 6.0 }
           ]
         },
         {
           name: "qwq-32b",
           displayName: "Reasoning",
           level: "Reasoning",
-          desc: "深度推理",
+          desc: "Deep reasoning",
           tiers: [
-            { range: "无阶梯", input: 1.6, output: 4.0 }
+            { range: "flat", input: 1.6, output: 4.0 }
           ]
         }
       ],
@@ -81,16 +81,16 @@ window.PRICE_DATA = {
           name: "qwen-vl-max",
           displayName: "Vision Max",
           level: "Vision Max",
-          desc: "高级图像理解",
+          desc: "Advanced image understanding",
           tiers: [
-            { range: "无阶梯", input: 1.6, output: 4.0 }
+            { range: "flat", input: 1.6, output: 4.0 }
           ]
         },
         {
           name: "qwen3-vl-plus",
           displayName: "Vision Plus",
           level: "Vision Plus",
-          desc: "平衡视觉理解",
+          desc: "Balanced vision understanding",
           tiers: [
             { range: "0-32K", input: 1.0, output: 10.0 },
             { range: "32K-128K", input: 1.5, output: 15.0 },
@@ -101,7 +101,7 @@ window.PRICE_DATA = {
           name: "qwen-omni",
           displayName: "Omni",
           level: "Omni",
-          desc: "全模态理解",
+          desc: "Multimodal understanding",
           tiers: [
             { range: "0-128K", input: 1.8, output: 6.9 }
           ]
@@ -110,7 +110,7 @@ window.PRICE_DATA = {
           name: "qvq-max",
           displayName: "Visual Reasoning",
           level: "Visual Reasoning",
-          desc: "视觉推理分析",
+          desc: "Visual reasoning analysis",
           tiers: [
             { range: "0-128K", input: 8.0, output: 32.0 }
           ]
@@ -121,7 +121,7 @@ window.PRICE_DATA = {
           name: "qwen-image-2.0",
           displayName: "Image Gen",
           level: "Image",
-          desc: "千问文生图 - 复杂布局与电商场景",
+          desc: "Qwen image generation",
           price: 0.50,
           unit: "per_image"
         }
@@ -135,7 +135,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-2.0-pro",
           displayName: "Flagship",
           level: "Flagship",
-          desc: "旗舰版，最强能力",
+          desc: "Flagship version, strongest capability",
           tiers: [
             { range: "0-32K", input: 3.2, output: 16.0 },
             { range: "32K-128K", input: 4.8, output: 24.0 },
@@ -146,7 +146,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-2.0-lite",
           displayName: "Pro",
           level: "Pro",
-          desc: "高性能通用模型",
+          desc: "High-performance general model",
           tiers: [
             { range: "0-32K", input: 0.6, output: 3.6 },
             { range: "32K-128K", input: 0.9, output: 5.4 },
@@ -157,7 +157,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-2.0-mini",
           displayName: "Flash",
           level: "Flash",
-          desc: "轻量版，经济实惠",
+          desc: "Lightweight, cost-effective",
           tiers: [
             { range: "0-32K", input: 0.2, output: 2.0 },
             { range: "32K-128K", input: 0.4, output: 4.0 },
@@ -168,7 +168,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-1.6-flash",
           displayName: "Flash",
           level: "Flash",
-          desc: "极速版，最低成本",
+          desc: "Ultra-fast, lowest cost",
           tiers: [
             { range: "0-32K", input: 0.15, output: 1.5 },
             { range: "32K-128K", input: 0.3, output: 3.0 },
@@ -179,18 +179,18 @@ window.PRICE_DATA = {
           name: "doubao-1.5-pro-32k",
           displayName: "Pro 32K",
           level: "Pro",
-          desc: "高性能长上下文",
+          desc: "High-performance long context",
           tiers: [
-            { range: "无阶梯", input: 0.8, output: 2.0 }
+            { range: "flat", input: 0.8, output: 2.0 }
           ]
         },
         {
           name: "doubao-1.5-lite-32k",
           displayName: "Lite 32K",
           level: "Lite",
-          desc: "轻量长上下文",
+          desc: "Lightweight long context",
           tiers: [
-            { range: "无阶梯", input: 0.3, output: 0.6 }
+            { range: "flat", input: 0.3, output: 0.6 }
           ]
         }
       ],
@@ -199,7 +199,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-2.0-code",
           displayName: "Coder Pro",
           level: "Coder Pro",
-          desc: "代码生成与补全",
+          desc: "Code generation and completion",
           tiers: [
             { range: "0-32K", input: 3.2, output: 16.0 },
             { range: "32K-128K", input: 4.8, output: 24.0 },
@@ -210,7 +210,7 @@ window.PRICE_DATA = {
           name: "doubao-seed-code",
           displayName: "Coder Lite",
           level: "Coder Lite",
-          desc: "通用代码模型",
+          desc: "General code model",
           tiers: [
             { range: "0-32K", input: 1.2, output: 8.0 },
             { range: "32K-128K", input: 1.4, output: 12.0 },
@@ -223,25 +223,25 @@ window.PRICE_DATA = {
           name: "doubao-1.5-vision-pro",
           displayName: "Vision Max",
           level: "Vision Max",
-          desc: "专业视觉理解",
+          desc: "Professional vision understanding",
           tiers: [
-            { range: "无阶梯", input: 3.0, output: 9.0 }
+            { range: "flat", input: 3.0, output: 9.0 }
           ]
         },
         {
           name: "doubao-1.5-vision-lite",
           displayName: "Vision Lite",
           level: "Vision Lite",
-          desc: "轻量视觉理解",
+          desc: "Lightweight vision understanding",
           tiers: [
-            { range: "无阶梯", input: 1.5, output: 4.5 }
+            { range: "flat", input: 1.5, output: 4.5 }
           ]
         },
         {
           name: "doubao-seed-1.6-vision",
           displayName: "Vision Plus",
           level: "Vision Plus",
-          desc: "视觉理解",
+          desc: "Vision understanding",
           tiers: [
             { range: "0-32K", input: 0.8, output: 8.0 },
             { range: "32K-128K", input: 1.2, output: 16.0 },
@@ -278,28 +278,28 @@ window.PRICE_DATA = {
       {
         name: "deepseek-v3",
         provider: "deepseek",
-        desc: "推理与编码",
+        desc: "Reasoning and coding",
         aliyun: { input: 2.0, output: 8.0 },
         bytedance: { input: 2.0, output: 8.0 }
       },
       {
         name: "deepseek-r1",
         provider: "deepseek",
-        desc: "深度推理",
+        desc: "Deep reasoning",
         aliyun: { input: 4.0, output: 16.0 },
         bytedance: { input: 4.0, output: 16.0 }
       },
       {
         name: "kimi-k2",
         provider: "moonshot",
-        desc: "长上下文",
+        desc: "Long context",
         aliyun: { input: 4.0, output: 16.0 },
         bytedance: { input: 4.0, output: 16.0 }
       },
       {
         name: "glm-4",
         provider: "zhipu",
-        desc: "通用场景",
+        desc: "General purpose",
         aliyun: { input: 2.0, output: 8.0 },
         bytedance: null
       }
@@ -341,4 +341,3 @@ window.PRICE_DATA = {
     }
   }
 };
-

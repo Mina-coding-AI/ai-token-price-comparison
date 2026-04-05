@@ -226,27 +226,6 @@
       ]
     },
     {
-      "name": "doubao-seed-1.6-thinking",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "0K-32K",
-          "input": 0.8,
-          "output": 8
-        },
-        {
-          "range": "32K-128K",
-          "input": 1.2,
-          "output": 16
-        },
-        {
-          "range": "128K-256K",
-          "input": 2.4,
-          "output": 24
-        }
-      ]
-    },
-    {
       "name": "doubao-seed-translation",
       "inferenceType": "online",
       "tiers": [
@@ -254,28 +233,6 @@
           "range": "flat",
           "input": 1.2,
           "output": 3.6
-        }
-      ]
-    },
-    {
-      "name": "doubao-1.5-thinking-pro",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 4,
-          "output": 16
-        }
-      ]
-    },
-    {
-      "name": "doubao-1.5-thinking-vision-pro",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 3,
-          "output": 9
         }
       ]
     },
@@ -309,39 +266,6 @@
           "range": "flat",
           "input": 3,
           "output": 9
-        }
-      ]
-    },
-    {
-      "name": "doubao-1.5-vision-lite",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 1.5,
-          "output": 4.5
-        }
-      ]
-    },
-    {
-      "name": "doubao-1.5-ui-tars",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 3.5,
-          "output": 12
-        }
-      ]
-    },
-    {
-      "name": "doubao-lite-32k",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 0.3,
-          "output": 0.6
         }
       ]
     },
@@ -406,17 +330,6 @@
     },
     {
       "name": "deepseek-r1",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 4,
-          "output": 16
-        }
-      ]
-    },
-    {
-      "name": "kimi-k2",
       "inferenceType": "online",
       "tiers": [
         {
@@ -612,27 +525,6 @@
       ]
     },
     {
-      "name": "doubao-seed-1.6-thinking",
-      "inferenceType": "batch",
-      "tiers": [
-        {
-          "range": "0K-32K",
-          "input": 0.4,
-          "output": 4
-        },
-        {
-          "range": "32K-128K",
-          "input": 0.6,
-          "output": 8
-        },
-        {
-          "range": "128K-256K",
-          "input": 1.2,
-          "output": 12
-        }
-      ]
-    },
-    {
       "name": "doubao-seed-1.6-flash",
       "inferenceType": "batch",
       "tiers": [
@@ -650,28 +542,6 @@
           "range": "128K-256K",
           "input": 0.3,
           "output": 3
-        }
-      ]
-    },
-    {
-      "name": "doubao-1.5-thinking-pro",
-      "inferenceType": "batch",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 2,
-          "output": 8
-        }
-      ]
-    },
-    {
-      "name": "doubao-1.5-thinking-vision-pro",
-      "inferenceType": "batch",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 1.5,
-          "output": 4.5
         }
       ]
     },
@@ -716,17 +586,6 @@
           "range": "flat",
           "input": 0.8,
           "output": 2
-        }
-      ]
-    },
-    {
-      "name": "doubao-lite-32k",
-      "inferenceType": "batch",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 0.3,
-          "output": 0.6
         }
       ]
     },
@@ -778,35 +637,12 @@
           "output": 8
         }
       ]
-    },
-    {
-      "name": "kimi-k2",
-      "inferenceType": "batch",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 2,
-          "output": 8
-        }
-      ]
     }
   ],
   "code": [],
   "vision": [],
   "image": [],
-  "video": [
-    {
-      "name": "doubao-seedance-1.5-pro",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 16,
-          "output": 0.28
-        }
-      ]
-    }
-  ],
+  "video": [],
   "audio": [
     {
       "name": "doubao-seed-1.8",
@@ -857,22 +693,6 @@
       ]
     },
     {
-      "name": "doubao-seed-1.6-thinking",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 1.92,
-          "output": 0.48
-        },
-        {
-          "range": "flat",
-          "input": 23.04,
-          "output": 5.76
-        }
-      ]
-    },
-    {
       "name": "doubao-seed-1.6-flash",
       "inferenceType": "online",
       "tiers": [
@@ -889,22 +709,6 @@
       ]
     },
     {
-      "name": "doubao-1.5-thinking-vision-pro",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 7.2,
-          "output": 2.16
-        },
-        {
-          "range": "flat",
-          "input": 86.4,
-          "output": 25.92
-        }
-      ]
-    },
-    {
       "name": "doubao-1.5-vision-pro",
       "inferenceType": "online",
       "tiers": [
@@ -917,22 +721,6 @@
           "range": "flat",
           "input": 86.4,
           "output": 25.92
-        }
-      ]
-    },
-    {
-      "name": "doubao-1.5-thinking-pro",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 9.6,
-          "output": 3.84
-        },
-        {
-          "range": "flat",
-          "input": 115.2,
-          "output": 46.08
         }
       ]
     },
@@ -1114,17 +902,6 @@
       ]
     },
     {
-      "name": "doubao-lite-32k",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 0.3,
-          "output": 0.6
-        }
-      ]
-    },
-    {
       "name": "doubao-seed-1.6",
       "inferenceType": "online",
       "tiers": [
@@ -1198,25 +975,14 @@
           "output": 2
         }
       ]
-    },
-    {
-      "name": "doubao-lite-32k",
-      "inferenceType": "online",
-      "tiers": [
-        {
-          "range": "flat",
-          "input": 0.3,
-          "output": 0.6
-        }
-      ]
     }
   ],
-  "scrapedAt": "2026-04-02T02:03:24.051Z",
+  "scrapedAt": "2026-04-05T13:45:39.831Z",
   "source": {
     "url": "https://www.volcengine.com/docs/82379/1544106",
     "documentId": 1544106,
     "title": "模型价格",
-    "lastUpdated": "2026-03-31T10:46:25Z",
-    "fetchedAt": "2026-04-02T02:03:24.055Z"
+    "lastUpdated": "2026-04-02T04:30:34Z",
+    "fetchedAt": "2026-04-05T13:45:39.836Z"
   }
 }
