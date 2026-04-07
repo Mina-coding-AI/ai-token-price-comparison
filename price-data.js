@@ -1,7 +1,7 @@
 window.PRICE_DATA = {
   metadata: {
-    lastUpdated: "2026-04-05",
-    updateTime: "09:52 下午 Beijin公元 Ti52e",
+    lastUpdated: "2026-04-07",
+    updateTime: "10:02 上午 Beijin公元 Ti2e",
     sources: {
       aliyun: "https://help.aliyun.com/help/json/document_detail.json?nodeId=2840914",
       bytedance: "https://www.volcengine.com/docs/82379/1544106"
