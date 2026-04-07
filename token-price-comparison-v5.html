@@ -1319,9 +1319,10 @@
             const container = document.getElementById('language-table');
             let html = `<div class="table-header"><div>${t.model}</div><div>${t.aliyunInput}</div><div>${t.aliyunOutput}</div><div>${t.bytedanceInput}</div><div>${t.bytedanceOutput}</div><div>${t.bestFor}</div></div>`;
 
-            const levels = ['Flagship', 'Pro', 'Flash'];
+            const levels = ['Flagship', 'Pro Plus', 'Pro', 'Flash'];
             const levelScenarios = {
                 'Flagship': currentLang === 'zh' ? '复杂推理、高精度任务' : 'Complex reasoning, high-precision tasks',
+                'Pro Plus': currentLang === 'zh' ? '高性能、高性价比' : 'High performance, great value',
                 'Pro': currentLang === 'zh' ? '日常对话、内容创作' : 'Daily conversations, content creation',
                 'Flash': currentLang === 'zh' ? '快速响应、低成本场景' : 'Fast response, cost-sensitive scenarios'
             };

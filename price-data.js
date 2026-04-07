@@ -1,7 +1,7 @@
-window.PRICE_DATA = {
+ï»¿window.PRICE_DATA = {
   metadata: {
     lastUpdated: "2026-04-07",
-    updateTime: "10:02 ÉÏÎç Beijin¹«Ôª Ti2e",
+    updateTime: "10:02 CST Beijing Time",
     sources: {
       aliyun: "https://help.aliyun.com/help/json/document_detail.json?nodeId=2840914",
       bytedance: "https://www.volcengine.com/docs/82379/1544106"
@@ -41,6 +41,16 @@ window.PRICE_DATA = {
             { range: "0-128K", input: 0.2, output: 2.0 },
             { range: "128K-256K", input: 0.8, output: 8.0 },
             { range: "256K-1M", input: 1.2, output: 12.0 }
+          ]
+        },
+        {
+          name: "qwen3.6-plus",
+          displayName: "Pro Plus",
+          level: "Pro Plus",
+          desc: "Balanced performance, speed and cost - faster than Qwen3-Max at lower price",
+          tiers: [
+            { range: "0-256K", input: 2.0, output: 12.0 },
+            { range: "256K-1M", input: 8.0, output: 48.0 }
           ]
         }
       ],
@@ -309,6 +319,7 @@ window.PRICE_DATA = {
   changes: [
     // Format: { date: "YYYY-MM-DD", type: "price_change"|"new_model", provider: "aliyun"|"bytedance", model: "name", level: "Flagship", field: "input"|"output", old: number, new: number, pctChange: number }
     // Note: Populated by daily update process when changes are detected
+    { date: "2026-04-07", type: "new_model", provider: "aliyun", model: "qwen3.6-plus", level: "Pro Plus", field: null, old: null, new: null, pctChange: null, note: "New model added - balanced performance, speed and cost" }
   ],
   // History data
   history: {
@@ -318,6 +329,7 @@ window.PRICE_DATA = {
       "qwen3-max": { input: [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5], output: [10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0] },
       "qwen3.5-plus": { input: [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8], output: [4.8, 4.8, 4.8, 4.8, 4.8, 4.8, 4.8, 4.8] },
       "qwen3.5-flash": { input: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2], output: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0] },
+      "qwen3.6-plus": { input: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0], output: [12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0] },
       "doubao-seed-2.0-pro": { input: [3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2, 3.2], output: [16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0] },
       "doubao-seed-2.0-lite": { input: [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6], output: [3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6] },
       "doubao-seed-2.0-mini": { input: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2], output: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0] },
@@ -341,3 +353,4 @@ window.PRICE_DATA = {
     }
   }
 };
+
