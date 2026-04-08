@@ -1,7 +1,7 @@
-ï»¿window.PRICE_DATA = {
+window.PRICE_DATA = {
   metadata: {
-    lastUpdated: "2026-04-07",
-    updateTime: "10:02 CST Beijing Time",
+    lastUpdated: "2026-04-08",
+    updateTime: "10:04 ÉÏÎç Beijin¹«Ôª Ti4e",
     sources: {
       aliyun: "https://help.aliyun.com/help/json/document_detail.json?nodeId=2840914",
       bytedance: "https://www.volcengine.com/docs/82379/1544106"
