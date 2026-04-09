@@ -111,6 +111,22 @@
       ]
     },
     {
+      "name": "doubao-seed-character",
+      "inferenceType": "online",
+      "tiers": [
+        {
+          "range": "0K-32K",
+          "input": 0.8,
+          "output": 2
+        },
+        {
+          "range": "32K-128K",
+          "input": 1.2,
+          "output": 6
+        }
+      ]
+    },
+    {
       "name": "doubao-seed-code",
       "inferenceType": "online",
       "tiers": [
@@ -977,12 +993,12 @@
       ]
     }
   ],
-  "scrapedAt": "2026-04-08T02:02:50.726Z",
+  "scrapedAt": "2026-04-09T02:04:00.500Z",
   "source": {
     "url": "https://www.volcengine.com/docs/82379/1544106",
     "documentId": 1544106,
     "title": "模型价格",
-    "lastUpdated": "2026-04-02T04:30:34Z",
-    "fetchedAt": "2026-04-08T02:02:50.729Z"
+    "lastUpdated": "2026-04-08T13:03:55Z",
+    "fetchedAt": "2026-04-09T02:04:00.504Z"
   }
 }
